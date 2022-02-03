@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<head>
+  <title>edit and update</title>
+</head>
+<body>
+  <center>
+    <h1>Update the Student Record</h1>
+    <h3>The Student id is {{crudstudent.id}}</h3>
+    <hr>
+    <form method="POST" action="/Update/{{crudstudent.id}}">
+      {% csrf_token %}
+    <table border="1">
+      <tr>
+        <td>제품 구분</td>
+        <td><input type="text" name="name_ko" value="{{crudstudent.name_ko}}"></td>
+      </tr>
+      <tr>
+        <td>Device Name</td>
+        <td><input type="text" name="name_en" value="{{crudstudent.name_en}}"></td>
+      </tr>
+      <tr>
+        <td>Service UUID</td>
+        <td><input type="text" name="service" value="{{crudstudent.service}}"></td>
+      </tr>
+      <tr>
+        <td>Product ID</td>
+        <td><input type="text" name="product" value="{{crudstudent.product}}"></td>
+      </tr>
+      <tr>
+        <td>Device ID</td>
+        <td><input type="text" name="device" value="{{crudstudent.device}}"></td>
+      </tr>
+
+
+       <tr>
+        <td>DFU File Name</td>
+        <td>
+          <div class="input">
+            <div id="droppable-zone">
+              <input class="droppable-file" id="input" type="file" placeholder="Input2" name="uploadedFile" value="{{crudstudent.uploadedFile}}">
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>DFU CRC32</td>
+        <td>
+          <div class="submit">
+            <input class="btn btn-default" id="execute" type="button" value="Hash">
+            <label>
+              <input id="auto-update" type="checkbox" value="1" checked="checked">Auto Update
+            </label>
+          </div>
+
+          <div class="output">
+            <input id="output" type="text" placeholder="crc" name="crc" value="{{crudstudent.crc}}">
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Image Name</td>
+        <td><input type="file" placeholder="device" name="imageFile" value="{{crudstudent.imageFile}}"></td>
+      </tr>
+
+    </table>
+    <input type="submit" name="" value="Update Student Record">
+    <a href="{% url 'stdisplay' %}">Home Page</a>
+    <hr>
+    {% if messages %}
+    {% for result in messages %}
+    {{result}}
+    {% endfor %}
+    {% endif %}
+    </form>
+    </center>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register User</title>
+    <style>
+        #main_div{
+            position: absolute;
+            left: 35%;
+        }
+
+        img{
+          position: absolute;
+          top: 0;
+          left: 0;
+          margin: 20px 30px;
+
+          width: 200px;
+          height: 59.3px
+        }
+    </style>
+</head>
+<body>
+    <img src="/static/img/robomation_logo.png" alt="로고">
+    <center>
+        <h1>Register Form</h1>
+    </center>
+        <hr>
+    <div id="main_div">
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{message}}</p>
+            {% endfor %}
+        {% endif %}
+        <form method="post" action="">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" />
+        </form>
+    </div>
+</body>
+</html>

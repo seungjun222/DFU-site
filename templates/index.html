@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<head>
+  <title>index page</title>
+  <style>
+    #miribogi_div{
+      background-color: rgb(49, 177, 209);
+      display: inline;
+
+      padding: 5px;
+
+      font-weight: bold;
+    }
+
+    #miribogi_div:hover{
+      cursor: pointer;
+    }
+
+    #nebo_miri_buttons{
+      margin-top: 20px;
+    }
+
+    #final_link{
+      background-color: #ffb6c1;
+      color: black;
+      text-decoration: none;
+      padding: 5px;
+
+      font-weight: bold;
+    }
+
+    #insert_link{
+      background-color: #1aee30;
+      color: black;
+      text-decoration: none;
+      padding: 5px;
+
+      font-weight: bold;
+    }
+
+    .modal-wrapper{
+        position: fixed;
+        top: -10%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+    }
+
+    .modal{
+        background: white;
+        padding: 24px 16px;
+        border: 5px solid rgb(49, 177, 209);
+        border-radius: 4px;
+        width: 1200px;
+        height: 90px;
+
+        opacity: 0.95;
+        color: black;
+    }
+
+    .close-wrapper{
+        position: sticky;
+        bottom: 0;
+        right: 0;
+        text-align: right;
+    }
+
+    #close1:hover{
+      cursor: pointer;
+    }
+
+    button{
+        width: 70px;
+        height: 30px;
+        font-size: 16px;
+        font-weight: bold;
+        background-color: #c6e2ff;
+        border: 3px solid rgb(49, 177, 209);
+    }
+
+    img{
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin: 20px 30px;
+
+      width: 200px;
+      height: 59.3px
+    }
+
+    #login_register{
+      position: absolute;
+      top: 30px;
+      right: 40px;
+    }
+  </style>
+</head>
+<body>
+  <img src="/static/img/robomation_logo.png" alt="로고">
+  <center>
+    <h1>DFU 파일 관리 사이트</h1>
+    <div id="login_register">
+      {% if user.is_authenticated %}
+      <a href="{% url 'logout' %}">Logout</a>
+      {% else %}
+      <a href="{% url 'login' %}">Login</a>
+      <a href="{% url 'register' %}">Register</a>
+      {% endif %}
+    </div>
+    <hr>
+    <br>
+    {% if user.is_authenticated %}
+    <a id="insert_link" href="{% url 'stinsert'%}"> 추가하기</a>
+    <br>
+    <br>
+    <form method="post">
+        {% csrf_token %}
+    <table border="1">
+      <tr>
+        <th></th>
+        <th>번호</th>
+        <th>등록 일자</th>
+        <th>제품 구분</th>
+        <th>Device Name</th>
+        <th>Service UUID</th>
+        <th>Product ID</th>
+        <th>Device ID</th>
+        <th>DFU File Name</th>
+        <th>DFU CRC32</th>
+        <th>DFU File 다운로드</th>
+        <th>Image Name</th>
+        <th>Image 다운로드</th>
+      </tr>
+      {% for displayst in crudstudent %}
+      <tr>
+        <td><input type="checkbox" name="check" value="{{displayst.id}}"></td>
+        <td>{{displayst.id}}</td>
+        <td>{{displayst.time}}</td>
+        <td>{{displayst.name_ko}}</td>
+        <td>{{displayst.name_en}}</td>
+        <td>{{displayst.service}}</td>
+        <td>{{displayst.product}}</td>
+        <td>{{displayst.device}}</td>
+        <td>{{displayst.uploadedFile}}</td>
+        <td>{{displayst.crc}}</td>
+        <td><a style="color:blue;" href="{{displayst.uploadedFile.url}}" download="">{{displayst.uploadedFile}}</a></td>
+        <td>{{displayst.imageFile}}</td>
+        <td><a style="color:blue;" href="{{displayst.imageFile.url}}" download="">{{displayst.imageFile}}</a></td>
+
+        <td><a style="color:#00549f;" href="/Edit/{{displayst.id}}">수정</a></td>
+        <td><a style="color:#00549f;" href="/Delete/{{displayst.id}}" onclick="return confirm('정말로 {{displayst.id}}번 데이터를 삭제하시겠습니까?')">삭제</a></td>
+      </tr>
+      {% endfor %}
+      <tr>
+      </tr>
+    </table>
+
+    <div id="nebo_miri_buttons">
+        <input type="submit" value="내보내기 준비"/>
+        <div id="miribogi_div">미리보기</div>
+        <a id="final_link" href="{% url 'stfinal'%}">최종화면</a>
+    </div>
+
+    </form>
+
+  </center>
+
+
+  <div class="modal-wrapper" id="modal" style="display: none;">
+    <div class="modal">
+
+      <div>&lt미리보기&gt</div>
+      <div>N{{z.id3}},{{z.time3}},{{z.name_ko3}},{{z.name_en3}},{{z.service3}},{{z.product3}},{{z.device3}},{{z.uploadedFile3}},{{z.crc3}},<a style="color:blue;" href="{{z.uploadedFile3.url}}" download="">{{z.uploadedFile3}}</a>,{{z.imageFile3}},<a style="color:blue;" href="{{z.imageFile3.url}}" download="">{{z.imageFile3}}</a></div>
+      <form method="post" id="html_form" onsubmit="return false">
+        {% csrf_token %}
+      <input type="submit" value="내보내기" name="nebonegi_button" id="nebonegi_button"/>
+      </form>
+      <div class="close-wrapper">
+        <button id="close1">닫기</button>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  로그인이 필요한 서비스입니다.
+  {% endif %}
+</body>
+<script>
+  nButton = document.getElementById("nebonegi_button");
+  html_form = document.getElementById("html_form");
+
+  nButton.onclick = () => {
+    pw = prompt("내보내려면 암호를 입력하세요.");
+    if(pw=="1234"){
+        html_form.setAttribute('onsubmit','return true');
+        confirm("내보내기 성공!")
+    }else{
+        alert("암호가 일치하지 않습니다.")
+    }
+  }
+
+
+ const open1 = document.getElementById("miribogi_div");
+ const modal = document.querySelector("#modal");
+
+ open1.onclick = () => {
+     modal.style.display = "flex";
+ }
+
+ const close1 = document.getElementById("close1");
+
+ close1.onclick = () => {
+     modal.style.display = "none";
+ }
+
+</script>
+</html>

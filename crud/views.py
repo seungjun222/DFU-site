@@ -16,7 +16,6 @@ def stdisplay(request):
             m_lst.append(j)
         m_lst2.append(m_lst)
         m_lst = []
-    print(m_lst2)
 
     m_savest2 = miribogi()
     m_result2 = miribogi.objects.all()
@@ -25,12 +24,12 @@ def stdisplay(request):
     if request.method == "POST":
         if request.POST.get("check"):
             m_umhaha = int(request.POST.get("check"))
-            print("m_umhaha:{}".format(m_umhaha))
+
             for i in range(0, len(m_lst2)):
                 if m_umhaha == m_lst2[i][0]:
                     for j in range(0, 10):
                         m_nebonegi.append(m_lst2[i][j])
-            print("성공:{}".format(m_nebonegi))
+
             m_savest2.id3 = m_nebonegi[0]
             m_savest2.time3 = m_nebonegi[1]
             m_savest2.name_ko3 = m_nebonegi[2]
@@ -62,7 +61,6 @@ def stdisplay(request):
             lst.append(j)
         lst2.append(lst) # 내부리스트에 저장된 값들을 이중리스트에 저장
         lst = [] # 그 다움 내부리스트에 새로운 값들을 저장하기 위해 초기화
-    print(lst2)
 
     savest2=zebal()
     result2=zebal.objects.all()

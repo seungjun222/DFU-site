@@ -6,7 +6,7 @@
 </head>
 <body>
     {% for i in zebal%}
-    <p>N{{i.id2}},{{i.time2}},{{i.name_ko2}},{{i.name_en2}},{{i.service2}},{{i.product2}},{{i.device2}},{{i.uploadedFile2}},{{i.crc2}},<a style="color:blue;" href="{{i.uploadedFile2.url}}" download="">{{i.uploadedFile2}}</a>,{{i.imageFile2}},<a style="color:blue;" href="{{i.imageFile2.url}}" download="">{{i.imageFile2}}</a></p>
+    <p>{{i.name_ko2}},{{i.time2}},{{i.name_en2}},{{i.service2}},{{i.product2}},{{i.device2}},{{i.uploadedFile2}},{{i.crc2}},<a style="color:blue;" href="{{i.uploadedFile2.url}}" download="">{{i.uploadedFile2}}</a>,{{i.imageFile2}},<a style="color:blue;" href="{{i.imageFile2.url}}" download="">{{i.imageFile2}}</a></p>
     {% endfor %}
 </body>
 </html>

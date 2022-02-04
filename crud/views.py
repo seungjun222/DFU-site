@@ -151,11 +151,33 @@ def stdelete(request,id):
     deletestudent.delete()
     result=crudstudent.objects.all()
 
+    # stdisplay처럼 index.html로 render하기 때문에 stdisplay가 넘긴 값들을 동일하게 넘겨주어야함
+
+    m_result2 = miribogi.objects.all()
+    result2 = zebal.objects.all()
+    zz = 0
+    for i in range(0, len(m_result2)):
+        if i == len(m_result2) - 1:
+            zz = m_result2[i]
+
+    return render(request,"index.html",{"crudstudent":result, "zebal":result2, "z":zz, "m_result2":m_result2})
+
+def stdelete2(request,id):
     deletestudent2 = zebal.objects.get(id=id)
     deletestudent2.delete()
     result2 = zebal.objects.all()
 
-    return render(request,"index.html",{"crudstudent":result, "zebal":result2})
+    # stdisplay처럼 index.html로 render하기 때문에 stdisplay가 넘긴 값들을 동일하게 넘겨주어야함
+
+    result=crudstudent.objects.all()
+
+    m_result2 = miribogi.objects.all()
+    zz = 0
+    for i in range(0, len(m_result2)):
+        if i == len(m_result2) - 1:
+            zz = m_result2[i]
+
+    return render(request,"index.html",{"crudstudent":result, "zebal":result2, "z":zz, "m_result2":m_result2})
 
 # =====================================================================================================================
 

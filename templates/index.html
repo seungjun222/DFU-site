@@ -37,7 +37,7 @@
       font-weight: bold;
     }
 
-    .modal-wrapper{
+    .modal-wrapper, .modal-wrapper2{
         position: fixed;
         top: -10%;
         left: 0;
@@ -55,21 +55,33 @@
         border: 5px solid rgb(49, 177, 209);
         border-radius: 4px;
         width: 1250px;
-        height: 400px;
+        height: 350px;
         overflow: auto;
 
         opacity: 0.95;
         color: black;
     }
 
-    .close-wrapper{
+    .modal2{
+        background: white;
+        padding: 24px 16px;
+        border: 5px solid #ffcc00;
+        border-radius: 4px;
+        width: 800px;
+        height: 400px;
+
+        opacity: 0.95;
+        color: black;
+    }
+
+    .close-wrapper, .close-wrapper2{
         position: sticky;
         bottom: 0;
         right: 0;
         text-align: right;
     }
 
-    #close1:hover{
+    #close1:hover, #close2:hover{
       cursor: pointer;
     }
 
@@ -80,6 +92,15 @@
         font-weight: bold;
         background-color: #c6e2ff;
         border: 3px solid rgb(49, 177, 209);
+    }
+
+    #close2{
+        width: 70px;
+        height: 30px;
+        font-size: 16px;
+        font-weight: bold;
+        background-color: #ffe700;
+        border: 3px solid #ffcc00;
     }
 
     img{
@@ -105,10 +126,24 @@
       font-size: 17px;
       font-weight: bold;
     }
+
+    #readme{
+      background-color: #ffcc00;
+      padding: 5px;
+      font-weight: bold;
+
+      position: absolute;
+      right: 70px;
+      margin-top: -30px;
+    }
+
+    #readme:hover{
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <img src="/static/img/robomation_logo.png" alt="로고">
+  <a href="{% url 'stdisplay' %}"><img src="/static/img/robomation_logo.png" alt="로고"></a>
   <center>
     <h1>DFU 파일 관리 사이트</h1>
     <div id="login_register">
@@ -123,6 +158,8 @@
     <br>
     {% if user.is_authenticated %}
     <a id="insert_link" href="{% url 'stinsert'%}"> 추가하기</a>
+    <div id="readme">사이트 이용 안내</div>
+
     <br>
     <br>
     <form method="post">
@@ -130,9 +167,9 @@
     <table border="1">
       <tr>
         <th></th>
-        <th>번호</th>
-        <th>등록 일자</th>
+<!--        <th>번호</th>-->
         <th>제품 구분</th>
+        <th>등록 일자</th>
         <th>Device Name</th>
         <th>Service UUID</th>
         <th>Product ID</th>
@@ -146,9 +183,9 @@
       {% for displayst in crudstudent %}
       <tr>
         <td><input type="checkbox" name="check" value="{{displayst.id}}"></td>
-        <td>{{displayst.id}}</td>
-        <td>{{displayst.time}}</td>
+<!--        <td>{{displayst.id}}</td>-->
         <td>{{displayst.name_ko}}</td>
+        <td>{{displayst.time}}</td>
         <td>{{displayst.name_en}}</td>
         <td>{{displayst.service}}</td>
         <td>{{displayst.product}}</td>
@@ -180,20 +217,39 @@
 
   <div class="modal-wrapper" id="modal" style="display: none;">
     <div class="modal">
-
       <div>&lt미리보기&gt</div>
       <div>
         {% for i in zebal%}
-        <p><a style="color:#00549f;" href="/Delete/{{i.id}}" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a> - N{{i.id2}},{{i.time2}},{{i.name_ko2}},{{i.name_en2}},{{i.service2}},{{i.product2}},{{i.device2}},{{i.uploadedFile2}},{{i.crc2}},<a style="color:blue;" href="{{i.uploadedFile2.url}}" download="">{{i.uploadedFile2}}</a>,{{i.imageFile2}},<a style="color:blue;" href="{{i.imageFile2.url}}" download="">{{i.imageFile2}}</a></p>
+        <p><a style="color:#00549f;" href="/Delete2/{{i.id}}" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a> - {{i.name_ko2}},{{i.time2}},{{i.name_en2}},{{i.service2}},{{i.product2}},{{i.device2}},{{i.uploadedFile2}},{{i.crc2}},<a style="color:blue;" href="{{i.uploadedFile2.url}}" download="">{{i.uploadedFile2}}</a>,{{i.imageFile2}},<a style="color:blue;" href="{{i.imageFile2.url}}" download="">{{i.imageFile2}}</a></p>
         {% endfor %}
       </div>
-      <div>신규 - N{{z.id3}},{{z.time3}},{{z.name_ko3}},{{z.name_en3}},{{z.service3}},{{z.product3}},{{z.device3}},{{z.uploadedFile3}},{{z.crc3}},<a style="color:blue;" href="{{z.uploadedFile3.url}}" download="">{{z.uploadedFile3}}</a>,{{z.imageFile3}},<a style="color:blue;" href="{{z.imageFile3.url}}" download="">{{z.imageFile3}}</a></div>
+      <div><span style="color: #ff6289;">신규</span> - {{z.name_ko3}},{{z.time3}},{{z.name_en3}},{{z.service3}},{{z.product3}},{{z.device3}},{{z.uploadedFile3}},{{z.crc3}},<a style="color:blue;" href="{{z.uploadedFile3.url}}" download="">{{z.uploadedFile3}}</a>,{{z.imageFile3}},<a style="color:blue;" href="{{z.imageFile3.url}}" download="">{{z.imageFile3}}</a></div>
       <form method="post" id="html_form" onsubmit="return false">
         {% csrf_token %}
       <input type="submit" value="내보내기" name="nebonegi_button" id="nebonegi_button"/>
       </form>
       <div class="close-wrapper">
         <button id="close1">닫기</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal-wrapper2" id="modal2" style="display: none;">
+    <div class="modal2">
+      <div>
+        <h2>★ 기능 소개</h2>
+        <p>▶ <strong>추가하기 -</strong> <strong>메인 페이지의 DB</strong> 테이블에 제품을 새로 등록</p>
+        <p>▶ <strong>내보내기 준비 -</strong> 선택한 데이터를 <strong>미리보기 DB</strong>에 제출</p>
+        <p>▶ <strong>미리보기 -</strong> 최종화면의 데이터와 내보내기 준비한 데이터 두 가지를 모두 보여줌</p>
+        <p>▶ <strong>내보내기 -</strong> 미리보기 모달창 안의 내보내기 버튼으로서, 내보내기 준비한 데이터를 <strong>최종화면 DB</strong>에 등록</p>
+        <p>▶ <strong>최종화면 -</strong> 최종적으로 내보낸 데이터들을 텍스트 형식으로 보여줌</p>
+        <hr>
+        <h2>★ 올바른 이용 순서</h2>
+        <p><strong>1.추가하기 → 2.선택 후 내보내기 준비 → 3.미리보기로 확인하기 → 4.내보내기 → 5.최종화면</strong></p>
+      </div>
+      <div class="close-wrapper2">
+        <button id="close2">닫기</button>
       </div>
     </div>
   </div>
@@ -227,6 +283,20 @@
 
  close1.onclick = () => {
      modal.style.display = "none";
+ }
+
+
+ const open2 = document.getElementById("readme");
+ const modal2 = document.querySelector("#modal2");
+
+ open2.onclick = () => {
+     modal2.style.display = "flex";
+ }
+
+ const close2 = document.getElementById("close2");
+
+ close2.onclick = () => {
+     modal2.style.display = "none";
  }
 
 </script>

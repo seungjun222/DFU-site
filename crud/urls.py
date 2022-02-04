@@ -26,6 +26,7 @@ urlpatterns = [
     path('Edit/<int:id>',views.stedit, name='stedit'),
     path('Update/<int:id>',views.stupdate, name='stupdate'),
     path('Delete/<int:id>',views.stdelete, name='stdelete'),
+    path('Delete2/<int:id>',views.stdelete2, name='stdelete2'),
     path('register/',views.register, name="register"),
     path('final', views.stfinal, name="stfinal"),
     path('',include('django.contrib.auth.urls'))

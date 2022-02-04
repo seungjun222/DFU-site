@@ -147,10 +147,15 @@ def stupdate(request,id):
         return render(request,"edit.html",{"crudstudent":stupdate})
 
 def stdelete(request,id):
-    deletestudent= crudstudent.objects.get(id=id)
+    deletestudent = crudstudent.objects.get(id=id)
     deletestudent.delete()
     result=crudstudent.objects.all()
-    return render(request,"index.html",{"crudstudent":result})
+
+    deletestudent2 = zebal.objects.get(id=id)
+    deletestudent2.delete()
+    result2 = zebal.objects.all()
+
+    return render(request,"index.html",{"crudstudent":result, "zebal":result2})
 
 # =====================================================================================================================
 

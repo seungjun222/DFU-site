@@ -54,8 +54,9 @@
         padding: 24px 16px;
         border: 5px solid rgb(49, 177, 209);
         border-radius: 4px;
-        width: 1200px;
-        height: 90px;
+        width: 1250px;
+        height: 400px;
+        overflow: auto;
 
         opacity: 0.95;
         color: black;
@@ -95,6 +96,14 @@
       position: absolute;
       top: 30px;
       right: 40px;
+    }
+
+    #nebonegi_button{
+      margin-top: 30px;
+      width: 100px;
+      height: 30px;
+      font-size: 17px;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -173,7 +182,12 @@
     <div class="modal">
 
       <div>&lt미리보기&gt</div>
-      <div>N{{z.id3}},{{z.time3}},{{z.name_ko3}},{{z.name_en3}},{{z.service3}},{{z.product3}},{{z.device3}},{{z.uploadedFile3}},{{z.crc3}},<a style="color:blue;" href="{{z.uploadedFile3.url}}" download="">{{z.uploadedFile3}}</a>,{{z.imageFile3}},<a style="color:blue;" href="{{z.imageFile3.url}}" download="">{{z.imageFile3}}</a></div>
+      <div>
+        {% for i in zebal%}
+        <p><a style="color:#00549f;" href="/Delete/{{i.id}}" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a> - N{{i.id2}},{{i.time2}},{{i.name_ko2}},{{i.name_en2}},{{i.service2}},{{i.product2}},{{i.device2}},{{i.uploadedFile2}},{{i.crc2}},<a style="color:blue;" href="{{i.uploadedFile2.url}}" download="">{{i.uploadedFile2}}</a>,{{i.imageFile2}},<a style="color:blue;" href="{{i.imageFile2.url}}" download="">{{i.imageFile2}}</a></p>
+        {% endfor %}
+      </div>
+      <div>신규 - N{{z.id3}},{{z.time3}},{{z.name_ko3}},{{z.name_en3}},{{z.service3}},{{z.product3}},{{z.device3}},{{z.uploadedFile3}},{{z.crc3}},<a style="color:blue;" href="{{z.uploadedFile3.url}}" download="">{{z.uploadedFile3}}</a>,{{z.imageFile3}},<a style="color:blue;" href="{{z.imageFile3.url}}" download="">{{z.imageFile3}}</a></div>
       <form method="post" id="html_form" onsubmit="return false">
         {% csrf_token %}
       <input type="submit" value="내보내기" name="nebonegi_button" id="nebonegi_button"/>

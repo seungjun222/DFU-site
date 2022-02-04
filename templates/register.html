@@ -24,9 +24,11 @@
     <img src="/static/img/robomation_logo.png" alt="로고">
     <center>
         <h1>Register Form</h1>
-    </center>
         <hr>
-    <div id="main_div">
+        <a style="color: blue;" href="">회원가입</a>
+    </center>
+    <!-- Admin 암호 입력 x의 경우 안보이고, o의 경우 보이게 설정 -->
+    <div id="main_div" style="display: none;">
         {% if messages %}
             {% for message in messages %}
                 <p>{{message}}</p>
@@ -36,7 +38,19 @@
             {% csrf_token %}
             {{form.as_p}}
             <input type="submit" />
+            <span><a style="color:blue; margin-left: 10px;" href="{% url 'stlogin' %}">로그인 페이지로 이동</a></span>
         </form>
     </div>
 </body>
+<script>
+    const main_div = document.getElementById("main_div");
+
+    pw = prompt("회원가입을 진행하려면 Admin 암호를 입력하세요.");
+    if(pw=="1234"){
+        confirm("Admin 인증 성공!")
+        main_div.style.display = "block";
+    }else{
+        alert("암호가 일치하지 않습니다.")
+    }
+</script>
 </html>

@@ -29,6 +29,7 @@ urlpatterns = [
     path('Delete2/<int:id>',views.stdelete2, name='stdelete2'),
     path('register/',views.register, name="register"),
     path('final', views.stfinal, name="stfinal"),
+    path('login',views.stlogin,name="stlogin"),
     path('',include('django.contrib.auth.urls'))
 ]
 

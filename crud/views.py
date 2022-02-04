@@ -196,4 +196,7 @@ def register(request):
             messages.success(request, 'User has been registered.')
     return render(request, 'register.html',{'form':form})
 
+def stlogin(request):
+    return render(request, './registration/login.html')
+
 # =====================================================================================================================

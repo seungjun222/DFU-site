@@ -26,6 +26,7 @@ SECRET_KEY = '92n*ty(-75#3f(f+nhr@&gxef#@ba1zcpho##lgebru=0j5va3'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+
     '13.124.142.118', #자신의 고정 IP 주소
 ]
 

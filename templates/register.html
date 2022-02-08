@@ -59,7 +59,7 @@
         <form method="post" action="">
             {% csrf_token %}
             {{form.as_p}}
-            <input type="submit" value="회원가입"/>
+            <input id="register_input" type="submit" value="회원가입"/>
             <span><a style="color:blue; margin-left: 10px; text-decoration: none;" href="{% url 'stlogin' %}">로그인 페이지로 이동</a></span>
         </form>
     </div>
@@ -69,7 +69,9 @@
     const register_link = document.getElementById("register_link");
     const login_link = document.getElementById("login_link");
 
-    pw = prompt("회원가입을 진행하려면 Admin 암호를 입력하세요.");
+    if({{user_flag}} != 1){
+        pw = prompt("회원가입을 진행하려면 Admin 암호를 입력하세요.");
+    }
 
     if(pw=="1234"){
         confirm("Admin 인증 성공!")

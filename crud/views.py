@@ -189,12 +189,14 @@ def index(request):
 
 def register(request):
     form = UserCreationForm
+    user_flag = 0
     if request.method == 'POST':
         regForm=UserCreationForm(request.POST)
         if regForm.is_valid():
             regForm.save()
             messages.success(request, 'User has been registered.')
-    return render(request, 'register.html',{'form':form})
+            user_flag = 1
+    return render(request, 'register.html',{'form':form, 'user_flag':user_flag})
 
 def stlogin(request):
     return render(request, './registration/login.html')

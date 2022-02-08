@@ -4,9 +4,19 @@
     <meta charset="UTF-8">
     <title>Register User</title>
     <style>
+        body{
+          background-color: rgb(215, 230, 240);
+        }
+
         #main_div{
             position: absolute;
             left: 35%;
+
+            font-size: 18px;
+        }
+
+        input{
+            font-size: 18px;
         }
 
         img{
@@ -18,14 +28,26 @@
           width: 200px;
           height: 59.3px
         }
+
+        *{
+          font-family: 'Gowun Dodum', sans-serif;
+        }
     </style>
+
+  <!--    GOOGLE FONTS LINK   -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <img src="/static/img/robomation_logo.png" alt="로고">
     <center>
-        <h1>Register Form</h1>
+        <h1>회원가입 페이지</h1>
         <hr>
-        <a style="color: blue;" href="">회원가입</a>
+        <br>
+        <a id="register_link" style="color: blue; font-size: 20px; text-decoration: none; display:inline;" href="">회원가입</a>
+        <a id="login_link" style="color: blue; font-size: 20px; text-decoration: none; display:inline; margin-left: 20px;" href="{% url 'login' %}">로그인</a>
     </center>
     <!-- Admin 암호 입력 x의 경우 안보이고, o의 경우 보이게 설정 -->
     <div id="main_div" style="display: none;">
@@ -37,18 +59,23 @@
         <form method="post" action="">
             {% csrf_token %}
             {{form.as_p}}
-            <input type="submit" />
-            <span><a style="color:blue; margin-left: 10px;" href="{% url 'stlogin' %}">로그인 페이지로 이동</a></span>
+            <input type="submit" value="회원가입"/>
+            <span><a style="color:blue; margin-left: 10px; text-decoration: none;" href="{% url 'stlogin' %}">로그인 페이지로 이동</a></span>
         </form>
     </div>
 </body>
 <script>
     const main_div = document.getElementById("main_div");
+    const register_link = document.getElementById("register_link");
+    const login_link = document.getElementById("login_link");
 
     pw = prompt("회원가입을 진행하려면 Admin 암호를 입력하세요.");
+
     if(pw=="1234"){
         confirm("Admin 인증 성공!")
         main_div.style.display = "block";
+        register_link.style.display = "none";
+        login_link.style.display = "none";
     }else{
         alert("암호가 일치하지 않습니다.")
     }

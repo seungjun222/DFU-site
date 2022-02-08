@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>Login User</title>
     <style>
-
+        body{
+          background-color: rgb(215, 230, 240);
+        }
 
         img{
           position: absolute;
@@ -15,11 +17,24 @@
           width: 200px;
           height: 59.3px
         }
+
+        form, input{
+            font-size: 20px;
+        }
+
+        *{
+      font-family: 'Gowun Dodum', sans-serif;
+        }
     </style>
+
+    <!--    GOOGLE FONTS LINK   -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 </head>
 <body>
     <center>
-        <h1>Login Form</h1>
+        <h1>로그인 페이지</h1>
         <img src="/static/img/robomation_logo.png" alt="로고">
         <hr>
         {% if messages %}
@@ -30,7 +45,8 @@
         <form method="post" action="">
             {% csrf_token %}
             {{form.as_p}}
-            <input type="submit" />
+            <input style="padding:5px 10px; font-size:18px; " type="submit" value="로그인"/>
+            <a style="color: blue; font-size:18px; text-decoration: none; margin-left: 10px;" href="{% url 'register' %}">회원가입 페이지로 이동</a>
         </form>
     </center>
 </body>

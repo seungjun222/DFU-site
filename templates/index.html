@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <head>
   <title>index page</title>
+
   <style>
+    body{
+      background-color: rgb(215, 230, 240);
+    }
+    table{
+      background-color: white;
+    }
+
     #miribogi_div{
-      background-color: rgb(49, 177, 209);
       display: inline;
 
       padding: 5px;
@@ -19,25 +26,33 @@
       margin-top: 20px;
     }
 
-    #final_link{
-      background-color: #ffb6c1;
+    #insert_link, #miribogi_div, #final_link{
+      border: 2px solid black;
       color: black;
       text-decoration: none;
-      padding: 5px;
-
+      padding: 7px;
+      background-color: #ffec5d;
       font-weight: bold;
+      font-size: 20px;
+
+      margin: 0 10px;
     }
 
-    #insert_link{
-      background-color: #1aee30;
-      color: black;
-      text-decoration: none;
-      padding: 5px;
-
+    #wait_input{
+      border: 2px solid black;
+      background-color: #ffec5d;
       font-weight: bold;
+      font-size: 20px;
+      padding: 7px;
+
+      margin: 0 10px;
     }
 
-    .modal-wrapper, .modal-wrapper2{
+    #wait_input:hover{
+      cursor: pointer;
+    }
+
+    .modal-wrapper{
         position: fixed;
         top: -10%;
         left: 0;
@@ -52,7 +67,7 @@
     .modal{
         background: white;
         padding: 24px 16px;
-        border: 5px solid rgb(49, 177, 209);
+        border: 5px solid rgb(175, 190, 220);
         border-radius: 4px;
         width: 1250px;
         height: 350px;
@@ -62,45 +77,30 @@
         color: black;
     }
 
-    .modal2{
-        background: white;
-        padding: 24px 16px;
-        border: 5px solid #ffcc00;
-        border-radius: 4px;
-        width: 800px;
-        height: 400px;
-
-        opacity: 0.95;
-        color: black;
-    }
-
-    .close-wrapper, .close-wrapper2{
-        position: sticky;
-        bottom: 0;
+    .close-wrapper{
+        position: absolute;
         right: 0;
         text-align: right;
     }
 
-    #close1:hover, #close2:hover{
+    #close1{
+      background-color: rgb(225, 225, 225);
+      border: 2px solid black;
+      padding: 7px;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    #close1:hover, #nebonegi_button:hover{
       cursor: pointer;
     }
 
-    button{
-        width: 70px;
-        height: 30px;
-        font-size: 16px;
-        font-weight: bold;
-        background-color: #c6e2ff;
-        border: 3px solid rgb(49, 177, 209);
-    }
+    #sticky_div{
+      position: sticky;
+      display: flex;
+      bottom: 0;
 
-    #close2{
-        width: 70px;
-        height: 30px;
-        font-size: 16px;
-        font-weight: bold;
-        background-color: #ffe700;
-        border: 3px solid #ffcc00;
+      margin-top: 25px;
     }
 
     img{
@@ -120,27 +120,22 @@
     }
 
     #nebonegi_button{
-      margin-top: 30px;
-      width: 100px;
-      height: 30px;
-      font-size: 17px;
+      background-color: #ffec5d;
+      border: 2px solid black;
+      padding: 7px;
       font-weight: bold;
+      font-size: 20px;
     }
 
-    #readme{
-      background-color: #ffcc00;
-      padding: 5px;
-      font-weight: bold;
-
-      position: absolute;
-      right: 70px;
-      margin-top: -30px;
-    }
-
-    #readme:hover{
-      cursor: pointer;
+    *{
+      font-family: 'Gowun Dodum', sans-serif;
     }
   </style>
+
+  <!--    GOOGLE FONTS LINK   -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 </head>
 <body>
   <a href="{% url 'stdisplay' %}"><img src="/static/img/robomation_logo.png" alt="로고"></a>
@@ -148,19 +143,16 @@
     <h1>DFU 파일 관리 사이트</h1>
     <div id="login_register">
       {% if user.is_authenticated %}
-      <a href="{% url 'logout' %}">Logout</a>
+      <span>현재 접속 ID : {{user}} 님</span>　 |　
+      <a style="color: blue; text-decoration:none;" href="{% url 'logout' %}">로그아웃</a>
       {% else %}
-      <a href="{% url 'login' %}">Login</a>
-      <a href="{% url 'register' %}">Register</a>
+      <a style="color: blue; text-decoration:none;" href="{% url 'login' %}">로그인</a>　|　
+      <a style="color: blue; text-decoration:none;" href="{% url 'register' %}">회원가입</a>
       {% endif %}
     </div>
     <hr>
     <br>
     {% if user.is_authenticated %}
-    <a id="insert_link" href="{% url 'stinsert'%}"> 추가하기</a>
-    <div id="readme">사이트 이용 안내</div>
-
-    <br>
     <br>
     <form method="post">
         {% csrf_token %}
@@ -196,8 +188,8 @@
         <td>{{displayst.imageFile}}</td>
         <td><a style="color:blue;" href="{{displayst.imageFile.url}}" download="">{{displayst.imageFile}}</a></td>
 
-        <td><a style="color:#00549f;" href="/Edit/{{displayst.id}}">수정</a></td>
-        <td><a style="color:#00549f;" href="/Delete/{{displayst.id}}" onclick="return confirm('정말로 {{displayst.id}}번 데이터를 삭제하시겠습니까?')">삭제</a></td>
+        <td><a style="color:#ff6289; text-decoration: none;" class="ee" href="/Edit/{{displayst.id}}" >수정</a></td>
+        <td><a style="color:#ff6289; text-decoration: none;" class="dd1" href="/Delete/{{displayst.id}}">삭제</a></td>
       </tr>
       {% endfor %}
       <tr>
@@ -205,7 +197,8 @@
     </table>
 
     <div id="nebo_miri_buttons">
-        <input type="submit" value="내보내기 준비"/>
+        <a id="insert_link" href="{% url 'stinsert'%}"> 추가하기</a>
+        <input id="wait_input" type="submit" value="대기하기"/>
         <div id="miribogi_div">미리보기</div>
         <a id="final_link" href="{% url 'stfinal'%}">최종화면</a>
     </div>
@@ -213,54 +206,57 @@
     </form>
 
   </center>
-
+  <br>
+  <div>
+    <hr>
+    <h2>★ 기능 소개</h2>
+    <p>▶ <strong>1. 추가하기 -</strong> <strong>메인 페이지의 DB</strong> 테이블에 제품을 새로 등록</p>
+    <p>▶ <strong>2. 대기하기 -</strong> 선택한 데이터를 <strong>미리보기 DB</strong>에 제출</p>
+    <p>▶ <strong>3. 미리보기 -</strong> 최종화면의 데이터와 가장 마지막으로 대기하기한 1개의 데이터를 모두 보여줌</p>
+    <p>▶ <strong>4. 내보내기 -</strong> 미리보기 안에 있는 내보내기 버튼으로서, 마지막으로 대기하기한 데이터를 <strong>최종화면 DB</strong>에 등록</p>
+    <p>▶ <strong>5. 최종화면 -</strong> 최종적으로 내보낸 데이터들을 텍스트 형식으로 새 창에 보여줌</p>
+    <hr>
+    <h2>★ 이용 순서</h2>
+    <p>▶ <strong>1.추가하기(생략가능) → 2.제품 선택 후 대기하기 → 3.미리보기 → 4.내보내기 → 5.최종화면</strong></p>
+    <hr>
+    <h2>★ 유의 사항</h2>
+    <p>▶ 선택은 <strong>1개씩만</strong> 가능</p>
+    <p>▶ 미리보기 안에 <strong>대기</strong>에 해당하는 데이터는 <strong>가장 최근에 "대기하기"한 항목임</strong></p>
+    <p>▶ ┗> 대기를 내보내기 하더라도 <strong>대기</strong>는 바뀌지 않음<strong>(새로 다른 것을 "대기하기"해야 바뀜)</strong></p>
+  </div>
 
   <div class="modal-wrapper" id="modal" style="display: none;">
     <div class="modal">
-      <div>&lt미리보기&gt</div>
+      <div><strong>&lt미리보기&gt</strong></div>
       <div>
         {% for i in zebal%}
-        <p><a style="color:#00549f;" href="/Delete2/{{i.id}}" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a> - {{i.name_ko2}},{{i.time2}},{{i.name_en2}},{{i.service2}},{{i.product2}},{{i.device2}},{{i.uploadedFile2}},{{i.crc2}},<a style="color:blue;" href="{{i.uploadedFile2.url}}" download="">{{i.uploadedFile2}}</a>,{{i.imageFile2}},<a style="color:blue;" href="{{i.imageFile2.url}}" download="">{{i.imageFile2}}</a></p>
+        <p><a style="color:#ff6289; text-decoration: none;" class="dd2" href="/Delete2/{{i.id}}">삭제</a> - {{i.name_ko2}},{{i.time2}},{{i.name_en2}},{{i.service2}},{{i.product2}},{{i.device2}},{{i.uploadedFile2}},{{i.crc2}},<a style="color:blue;" href="{{i.uploadedFile2.url}}" download="">{{i.uploadedFile2}}</a>,{{i.imageFile2}},<a style="color:blue;" href="{{i.imageFile2.url}}" download="">{{i.imageFile2}}</a></p>
         {% endfor %}
       </div>
-      <div><span style="color: #ff6289;">신규</span> - {{z.name_ko3}},{{z.time3}},{{z.name_en3}},{{z.service3}},{{z.product3}},{{z.device3}},{{z.uploadedFile3}},{{z.crc3}},<a style="color:blue;" href="{{z.uploadedFile3.url}}" download="">{{z.uploadedFile3}}</a>,{{z.imageFile3}},<a style="color:blue;" href="{{z.imageFile3.url}}" download="">{{z.imageFile3}}</a></div>
-      <form method="post" id="html_form" onsubmit="return false">
-        {% csrf_token %}
-      <input type="submit" value="내보내기" name="nebonegi_button" id="nebonegi_button"/>
-      </form>
-      <div class="close-wrapper">
-        <button id="close1">닫기</button>
+      <hr>
+      <div><span style="color: #00549f;">대기</span> - {{z.name_ko3}},{{z.time3}},{{z.name_en3}},{{z.service3}},{{z.product3}},{{z.device3}},{{z.uploadedFile3}},{{z.crc3}},<a style="color:blue;" href="{{z.uploadedFile3.url}}" download="">{{z.uploadedFile3}}</a>,{{z.imageFile3}},<a style="color:blue;" href="{{z.imageFile3.url}}" download="">{{z.imageFile3}}</a></div>
+
+      <div id="sticky_div">
+         <form method="post" id="html_form" onsubmit="return false">
+          {% csrf_token %}
+          <div id="nebonegi_wrapper"><input type="submit" value="내보내기" name="nebonegi_button" id="nebonegi_button"/></div>
+        </form>
+        <div class="close-wrapper">
+          <button id="close1">닫기</button>
+        </div>
       </div>
+
     </div>
   </div>
 
 
-  <div class="modal-wrapper2" id="modal2" style="display: none;">
-    <div class="modal2">
-      <div>
-        <h2>★ 기능 소개</h2>
-        <p>▶ <strong>추가하기 -</strong> <strong>메인 페이지의 DB</strong> 테이블에 제품을 새로 등록</p>
-        <p>▶ <strong>내보내기 준비 -</strong> 선택한 데이터를 <strong>미리보기 DB</strong>에 제출</p>
-        <p>▶ <strong>미리보기 -</strong> 최종화면의 데이터와 내보내기 준비한 데이터 두 가지를 모두 보여줌</p>
-        <p>▶ <strong>내보내기 -</strong> 미리보기 모달창 안의 내보내기 버튼으로서, 내보내기 준비한 데이터를 <strong>최종화면 DB</strong>에 등록</p>
-        <p>▶ <strong>최종화면 -</strong> 최종적으로 내보낸 데이터들을 텍스트 형식으로 보여줌</p>
-        <hr>
-        <h2>★ 올바른 이용 순서</h2>
-        <p><strong>1.회원가입 → 2.로그인 → 3.추가하기 → 4.내보내기 준비 → 5.미리보기 → 6.내보내기 → 7.최종화면</strong></p>
-      </div>
-      <div class="close-wrapper2">
-        <button id="close2">닫기</button>
-      </div>
-    </div>
-  </div>
   {% else %}
-  로그인이 필요한 서비스입니다.
+  <p style="font-size: 18px;">로그인이 필요한 서비스입니다.</p>
   {% endif %}
 </body>
 <script>
   nButton = document.getElementById("nebonegi_button");
   html_form = document.getElementById("html_form");
-
   nButton.onclick = () => {
     pw = prompt("내보내려면 암호를 입력하세요.");
     if(pw=="1234"){
@@ -272,32 +268,59 @@
   }
 
 
+
  const open1 = document.getElementById("miribogi_div");
  const modal = document.querySelector("#modal");
-
  open1.onclick = () => {
      modal.style.display = "flex";
  }
 
  const close1 = document.getElementById("close1");
-
  close1.onclick = () => {
      modal.style.display = "none";
  }
 
 
- const open2 = document.getElementById("readme");
- const modal2 = document.querySelector("#modal2");
 
- open2.onclick = () => {
-     modal2.style.display = "flex";
- }
+const wait_input = document.getElementById("wait_input");
+wait_input.onclick = () => {
+    confirm("대기하기 완료!")
+}
 
- const close2 = document.getElementById("close2");
 
- close2.onclick = () => {
-     modal2.style.display = "none";
- }
+
+const edit_link = document.querySelectorAll('.ee');
+edit_link.forEach(el => el.addEventListener('click', event => {
+    pw1 = prompt("수정하려면 암호를 입력하세요.");
+    if(pw1=="1234"){
+        confirm("인증 성공!")
+    }else{
+        alert("암호가 일치하지 않습니다.")
+        event.target.setAttribute("href", "");
+    }
+}));
+
+const delete_link1 = document.querySelectorAll('.dd1');
+delete_link1.forEach(el => el.addEventListener('click', event => {
+    pw2 = prompt("삭제하려면 암호를 입력하세요.");
+    if(pw2=="1234"){
+        confirm("인증 성공!")
+    }else{
+        alert("암호가 일치하지 않습니다.")
+        event.target.setAttribute("href", "");
+    }
+}));
+
+const delete_link2 = document.querySelectorAll('.dd2');
+delete_link2.forEach(el => el.addEventListener('click', event => {
+    pw2 = prompt("삭제하려면 암호를 입력하세요.");
+    if(pw2=="1234"){
+        confirm("인증 성공!")
+    }else{
+        alert("암호가 일치하지 않습니다.")
+        event.target.setAttribute("href", "");
+    }
+}));
 
 </script>
 </html>

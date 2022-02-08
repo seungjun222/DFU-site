@@ -3,10 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <style>
+        *{
+          font-family: 'Gowun Dodum', sans-serif;
+        }
+    </style>
+
+    <!--    GOOGLE FONTS LINK   -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 </head>
 <body>
-    {% for i in zebal%}
-    <p>{{i.name_ko2}},{{i.time2}},{{i.name_en2}},{{i.service2}},{{i.product2}},{{i.device2}},{{i.uploadedFile2}},{{i.crc2}},<a style="color:blue;" href="{{i.uploadedFile2.url}}" download="">{{i.uploadedFile2}}</a>,{{i.imageFile2}},<a style="color:blue;" href="{{i.imageFile2.url}}" download="">{{i.imageFile2}}</a></p>
-    {% endfor %}
+      {% if user.is_authenticated %}
+        {% for i in zebal%}
+        <p>$,{{i.name_ko2}},{{i.time2}},{{i.name_en2}},{{i.service2}},{{i.product2}},{{i.device2}},{{i.uploadedFile2}},{{i.crc2}},<a style="color:blue;" href="{{i.uploadedFile2.url}}" download="">{{i.uploadedFile2}}</a>,{{i.imageFile2}},<a style="color:blue;" href="{{i.imageFile2.url}}" download="">{{i.imageFile2}}</a></p>
+        {% endfor %}
+      {% else %}
+        <p style="font-size: 18px;">로그인이 필요한 서비스입니다.</p>
+      {% endif %}
 </body>
 </html>

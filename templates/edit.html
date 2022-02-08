@@ -1,11 +1,52 @@
 <!DOCTYPE html>
 <head>
   <title>edit and update</title>
+
+  <style>
+     body{
+        background-color: rgb(215, 230, 240);
+      }
+
+      table{
+        background-color: white;
+      }
+
+      img{
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 20px 30px;
+
+        width: 200px;
+        height: 59.3px
+      }
+
+      table{
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+
+      td{
+        padding: 10px;
+      }
+
+      input{
+        font-size:18px;
+      }
+
+      *{
+        font-family: 'Gowun Dodum', sans-serif;
+      }
+  </style>
+
+  <!--    GOOGLE FONTS LINK   -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 </head>
 <body>
   <center>
-    <h1>Update the Student Record</h1>
-    <h3>The Student id is {{crudstudent.id}}</h3>
+    <h1>제품 등록</h1>
     <hr>
     <form method="POST" action="/Update/{{crudstudent.id}}">
       {% csrf_token %}
@@ -63,8 +104,9 @@
       </tr>
 
     </table>
-    <input type="submit" name="" value="Update Student Record">
-    <a href="{% url 'stdisplay' %}">Home Page</a>
+    <input type="submit" name="" value="수정하기">
+    <a style="color: blue; font-size: 18px; text-decoration: none;" href="{% url 'stdisplay'%}"> 홈으로 이동 </a>
+
     <hr>
     {% if messages %}
     {% for result in messages %}

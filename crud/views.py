@@ -4,8 +4,9 @@ from django.contrib import messages
 from crud.forms import stform
 
 def stdisplay(request):
-    result=crudstudent.objects.all()
+    delete_flag = 0
 
+    result=crudstudent.objects.all()
 
     m_haha = crudstudent.objects.values()
     m_haha = list(m_haha)
@@ -85,32 +86,7 @@ def stdisplay(request):
             savest2.imageFile2 = zz.imageFile3
             savest2.save()
 
-    # ===================================================================================================================================
-
-    # nebonegi = [] # 아까 만들었던 (기존에 존재하는 QuerySet을 리스트로 변환했던) lst2에서 선택한 개체들을 저장 및 불러오기 위한 빈 리스트 생성
-    # if request.method=="POST": # 프론트엔드 단에서 "내보내기" 버튼을 submit하여 post될 경우
-    #     if request.POST.get("check"): # 해당 post가 checkbox의 name인 check와 일치할 경우
-    #         umhaha = int(request.POST.get("check")) # checkbox의 value값인 {{displayst.id}}를 받아옴. str이라 int로 변환
-    #         print("umhaha:{}".format(umhaha))
-    #         for i in range(0, len(lst2)): # 이중리스트의 전체 길이만큼 반복
-    #             if umhaha == lst2[i][0]: # 선택한 checkbox의 value값인 {{displayst.id}}와 이중리스트의[i][0](즉, 각 내부리스트의 id)가 일치할 경우 => (체크박스에서 선택한 해당 데이터들만 불러오기 위해)
-    #                 for j in range(0, 10): # 0부터 9번 인덱스까지 (models.py의 변수들이 10개이므로)
-    #                     nebonegi.append(lst2[i][j]) # (아까 만든 빈 리스트에 선택한 데이터의 모든 값들을 append)
-    #         print("성공:{}".format(nebonegi))
-    #         savest2.id2 = nebonegi[0] # 영구적으로 저장하기 위해 선택한 데이터의 모든 값들을 append한 리스트의 인덱스별로 models.py의 db에 저장
-    #         savest2.time2 = nebonegi[1] # 이하 동일
-    #         savest2.name_ko2 = nebonegi[2]
-    #         savest2.name_en2 = nebonegi[3]
-    #         savest2.service2 = nebonegi[4]
-    #         savest2.product2 = nebonegi[5]
-    #         savest2.device2 = nebonegi[6]
-    #         savest2.uploadedFile2 = nebonegi[7]
-    #         savest2.crc2 = nebonegi[8]
-    #         savest2.imageFile2 = nebonegi[9]
-    #
-    #         savest2.save()
-
-    return render(request,"index.html",{"crudstudent":result, "zebal":result2, "z":zz, "m_result2":m_result2})
+    return render(request,"index.html",{"crudstudent":result, "zebal":result2, "z":zz, "m_result2":m_result2, "delete_flag":delete_flag})
 
 def stinsert(request):
     if request.method=="POST":
@@ -125,7 +101,7 @@ def stinsert(request):
             savest.crc=request.POST.get('crc')
             savest.imageFile=request.FILES.get('imageFile')
             savest.save()
-            messages.success(request,"The Record "+savest.name_ko+" is saved successfully !")
+            messages.success(request, "정상적으로 " + savest.name_ko + "의 등록이 완료되었습니다!")
             return render(request,"create.html")
 
     return render(request,"create.html")
@@ -143,7 +119,7 @@ def stupdate(request,id):
     form=stform(request.POST,instance=stupdate)
     if form.is_valid():
         form.save()
-        messages.success(request,"The Student Record Updated Successfull")
+        messages.success(request,"정상적으로 수정이 완료되었습니다!")
         return render(request,"edit.html",{"crudstudent":stupdate})
 
 def stdelete(request,id):
@@ -151,6 +127,7 @@ def stdelete(request,id):
     deletestudent.delete()
     result=crudstudent.objects.all()
 
+    delete_flag = 1
     # stdisplay처럼 index.html로 render하기 때문에 stdisplay가 넘긴 값들을 동일하게 넘겨주어야함
 
     m_result2 = miribogi.objects.all()
@@ -160,13 +137,14 @@ def stdelete(request,id):
         if i == len(m_result2) - 1:
             zz = m_result2[i]
 
-    return render(request,"index.html",{"crudstudent":result, "zebal":result2, "z":zz, "m_result2":m_result2})
+    return render(request,"index.html",{"crudstudent":result, "zebal":result2, "z":zz, "m_result2":m_result2, "delete_flag":delete_flag})
 
 def stdelete2(request,id):
     deletestudent2 = zebal.objects.get(id=id)
     deletestudent2.delete()
     result2 = zebal.objects.all()
 
+    delete_flag = 1
     # stdisplay처럼 index.html로 render하기 때문에 stdisplay가 넘긴 값들을 동일하게 넘겨주어야함
 
     result=crudstudent.objects.all()
@@ -177,7 +155,7 @@ def stdelete2(request,id):
         if i == len(m_result2) - 1:
             zz = m_result2[i]
 
-    return render(request,"index.html",{"crudstudent":result, "zebal":result2, "z":zz, "m_result2":m_result2})
+    return render(request,"index.html",{"crudstudent":result, "zebal":result2, "z":zz, "m_result2":m_result2, "delete_flag":delete_flag})
 
 # =====================================================================================================================
 
@@ -202,3 +180,27 @@ def stlogin(request):
     return render(request, './registration/login.html')
 
 # =====================================================================================================================
+    # def stdisplay에 썼었던 코드
+
+    # nebonegi = [] # 아까 만들었던 (기존에 존재하는 QuerySet을 리스트로 변환했던) lst2에서 선택한 개체들을 저장 및 불러오기 위한 빈 리스트 생성
+    # if request.method=="POST": # 프론트엔드 단에서 "내보내기" 버튼을 submit하여 post될 경우
+    #     if request.POST.get("check"): # 해당 post가 checkbox의 name인 check와 일치할 경우
+    #         umhaha = int(request.POST.get("check")) # checkbox의 value값인 {{displayst.id}}를 받아옴. str이라 int로 변환
+    #         print("umhaha:{}".format(umhaha))
+    #         for i in range(0, len(lst2)): # 이중리스트의 전체 길이만큼 반복
+    #             if umhaha == lst2[i][0]: # 선택한 checkbox의 value값인 {{displayst.id}}와 이중리스트의[i][0](즉, 각 내부리스트의 id)가 일치할 경우 => (체크박스에서 선택한 해당 데이터들만 불러오기 위해)
+    #                 for j in range(0, 10): # 0부터 9번 인덱스까지 (models.py의 변수들이 10개이므로)
+    #                     nebonegi.append(lst2[i][j]) # (아까 만든 빈 리스트에 선택한 데이터의 모든 값들을 append)
+    #         print("성공:{}".format(nebonegi))
+    #         savest2.id2 = nebonegi[0] # 영구적으로 저장하기 위해 선택한 데이터의 모든 값들을 append한 리스트의 인덱스별로 models.py의 db에 저장
+    #         savest2.time2 = nebonegi[1] # 이하 동일
+    #         savest2.name_ko2 = nebonegi[2]
+    #         savest2.name_en2 = nebonegi[3]
+    #         savest2.service2 = nebonegi[4]
+    #         savest2.product2 = nebonegi[5]
+    #         savest2.device2 = nebonegi[6]
+    #         savest2.uploadedFile2 = nebonegi[7]
+    #         savest2.crc2 = nebonegi[8]
+    #         savest2.imageFile2 = nebonegi[9]
+    #
+    #         savest2.save()

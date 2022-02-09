@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-  <title>index page</title>
+  <title>DFU-file site</title>
 
   <style>
     body{
@@ -224,6 +224,7 @@
     <p>▶ 미리보기 안에 <strong>대기</strong>에 해당하는 데이터는 <strong>가장 최근에 "대기하기"한 항목임</strong></p>
     <p>▶ ┗> 대기를 내보내기 하더라도 <strong>대기</strong>는 바뀌지 않음<strong>(새로 다른 것을 "대기하기"해야 바뀜)</strong></p>
   </div>
+  <br>
 
   <div class="modal-wrapper" id="modal" style="display: none;">
     <div class="modal">
@@ -253,74 +254,80 @@
   {% else %}
   <p style="font-size: 18px;">로그인이 필요한 서비스입니다.</p>
   {% endif %}
+
 </body>
+
 <script>
-  nButton = document.getElementById("nebonegi_button");
-  html_form = document.getElementById("html_form");
-  nButton.onclick = () => {
-    pw = prompt("내보내려면 암호를 입력하세요.");
-    if(pw=="1234"){
-        html_form.setAttribute('onsubmit','return true');
-        confirm("내보내기 성공!")
-    }else{
-        alert("암호가 일치하지 않습니다.")
+    nButton = document.getElementById("nebonegi_button");
+    html_form = document.getElementById("html_form");
+    nButton.onclick = () => {
+      pw = prompt("내보내려면 암호를 입력하세요.");
+      if(pw=="1234"){
+          html_form.setAttribute('onsubmit','return true');
+          confirm("내보내기 성공!")
+      }else{
+          alert("암호가 일치하지 않습니다.")
+      }
     }
-  }
 
 
 
- const open1 = document.getElementById("miribogi_div");
- const modal = document.querySelector("#modal");
- open1.onclick = () => {
-     modal.style.display = "flex";
- }
+     const open1 = document.getElementById("miribogi_div");
+     const modal = document.querySelector("#modal");
+     open1.onclick = () => {
+         modal.style.display = "flex";
+     }
 
- const close1 = document.getElementById("close1");
- close1.onclick = () => {
-     modal.style.display = "none";
- }
-
-
-
-const wait_input = document.getElementById("wait_input");
-wait_input.onclick = () => {
-    confirm("대기하기 완료!")
-}
+     const close1 = document.getElementById("close1");
+     close1.onclick = () => {
+         modal.style.display = "none";
+     }
 
 
 
-const edit_link = document.querySelectorAll('.ee');
-edit_link.forEach(el => el.addEventListener('click', event => {
-    pw1 = prompt("수정하려면 암호를 입력하세요.");
-    if(pw1=="1234"){
-        confirm("인증 성공!")
-    }else{
-        alert("암호가 일치하지 않습니다.")
-        event.target.setAttribute("href", "");
+    const wait_input = document.getElementById("wait_input");
+    wait_input.onclick = () => {
+        confirm("대기하기 완료!")
     }
-}));
 
-const delete_link1 = document.querySelectorAll('.dd1');
-delete_link1.forEach(el => el.addEventListener('click', event => {
-    pw2 = prompt("삭제하려면 암호를 입력하세요.");
-    if(pw2=="1234"){
-        confirm("인증 성공!")
-    }else{
-        alert("암호가 일치하지 않습니다.")
-        event.target.setAttribute("href", "");
-    }
-}));
 
-const delete_link2 = document.querySelectorAll('.dd2');
-delete_link2.forEach(el => el.addEventListener('click', event => {
-    pw2 = prompt("삭제하려면 암호를 입력하세요.");
-    if(pw2=="1234"){
-        confirm("인증 성공!")
-    }else{
-        alert("암호가 일치하지 않습니다.")
-        event.target.setAttribute("href", "");
+
+    const edit_link = document.querySelectorAll('.ee');
+    edit_link.forEach(el => el.addEventListener('click', event => {
+        pw1 = prompt("수정하려면 암호를 입력하세요.");
+        if(pw1=="1234"){
+            confirm("인증 성공!")
+        }else{
+            alert("암호가 일치하지 않습니다.")
+            event.target.setAttribute("href", "");
+        }
+    }));
+
+    const delete_link1 = document.querySelectorAll('.dd1');
+    delete_link1.forEach(el => el.addEventListener('click', event => {
+        pw2 = prompt("삭제하려면 암호를 입력하세요.");
+        if(pw2=="1234"){
+            confirm("인증 성공!")
+        }else{
+            alert("암호가 일치하지 않습니다.")
+            event.target.setAttribute("href", "");
+        }
+    }));
+
+    const delete_link2 = document.querySelectorAll('.dd2');
+    delete_link2.forEach(el => el.addEventListener('click', event => {
+        pw2 = prompt("삭제하려면 암호를 입력하세요.");
+        if(pw2=="1234"){
+            confirm("인증 성공!")
+        }else{
+            alert("암호가 일치하지 않습니다.")
+            event.target.setAttribute("href", "");
+        }
+    }));
+
+    if({{delete_flag}} == 1){
+        window.location.href="{% url 'stdisplay' %}";
     }
-}));
 
 </script>
 </html>

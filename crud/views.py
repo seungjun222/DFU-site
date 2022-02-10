@@ -88,9 +88,9 @@ def stdisplay(request):
             savest2.imageFile2 = zz.imageFile3
             savest2.save()
 
-    EDIT_P = os.environ.get("EDIT_PASSWORD")
-    DELETE_P = os.environ.get("DELETE_PASSWORD")
-    EXPORT_P = os.environ.get("EXPORT_PASSWORD")
+    EDIT_P = os.environ.get('EDIT_PASSWORD')
+    DELETE_P = os.environ.get('DELETE_PASSWORD')
+    EXPORT_P = os.environ.get('EXPORT_PASSWORD')
 
     return render(request,"index.html",{"crudstudent":result, "zebal":result2, "z":zz, "m_result2":m_result2, "delete_flag":delete_flag, "EDIT_P":EDIT_P, "DELETE_P":DELETE_P, "EXPORT_P":EXPORT_P})
 
@@ -180,7 +180,7 @@ def register(request):
             regForm.save()
             messages.success(request, 'User has been registered.')
             user_flag = 1
-    ADMIN_P = os.environ.get("ADMIN_PASSWORD")
+    ADMIN_P = os.environ.get('ADMIN_PASSWORD')
 
     return render(request, 'register.html',{'form':form, 'user_flag':user_flag, 'ADMIN_P':ADMIN_P})
 

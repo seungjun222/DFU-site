@@ -263,7 +263,7 @@
     html_form = document.getElementById("html_form");
     nButton.onclick = () => {
       pw = prompt("내보내려면 암호를 입력하세요.");
-      if(pw=="{{EXPORT_P}}}"){
+      if(pw=={{EXPORT_P}}){
           html_form.setAttribute('onsubmit','return true');
           confirm("내보내기 성공!")
       }else{
@@ -296,7 +296,7 @@
     const edit_link = document.querySelectorAll('.ee');
     edit_link.forEach(el => el.addEventListener('click', event => {
         pw1 = prompt("수정하려면 암호를 입력하세요.");
-        if(pw1=="{{EDIT_P}}"){
+        if(pw1=={{EDIT_P}}){
             confirm("인증 성공!")
         }else{
             alert("암호가 일치하지 않습니다.")
@@ -307,7 +307,7 @@
     const delete_link1 = document.querySelectorAll('.dd1');
     delete_link1.forEach(el => el.addEventListener('click', event => {
         pw2 = prompt("삭제하려면 암호를 입력하세요.");
-        if(pw2=="{{DELETE_P}}"){
+        if(pw2=={{DELETE_P}}){
             confirm("인증 성공!")
         }else{
             alert("암호가 일치하지 않습니다.")
@@ -318,7 +318,7 @@
     const delete_link2 = document.querySelectorAll('.dd2');
     delete_link2.forEach(el => el.addEventListener('click', event => {
         pw2 = prompt("삭제하려면 암호를 입력하세요.");
-        if(pw2=="{{DELETE_P}}"){
+        if(pw2=={{DELETE_P}}){
             confirm("인증 성공!")
         }else{
             alert("암호가 일치하지 않습니다.")

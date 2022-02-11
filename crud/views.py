@@ -11,18 +11,26 @@ def stdisplay(request):
     result=crudstudent.objects.all()
 
     m_haha = crudstudent.objects.values()
-    m_haha = list(m_haha)
-    m_lst = []
-    m_lst2 = []
-    for i in m_haha:
-        for j in i.values():
+    m_haha = list(m_haha) # QuerySet인 m_haha를 리스트의 형태로 변환
+    m_lst = [] # 곧 만들 이중리스트의 내부리스트에 해당
+    m_lst2 = [] # 곧 만들 이중리스트에 해당
+    for i in m_haha: # models.py에 있는 crudstudent db의 object들의 value 값들을 하나씩 돌며 반복
+        for j in i.values(): # value 값들의 value 값들을 하나씩 돌며 반복하여 내부리스트에 저장
             m_lst.append(j)
-        m_lst2.append(m_lst)
-        m_lst = []
+        m_lst2.append(m_lst) # 내부리스트에 저장된 값들을 이중리스트에 저장
+        m_lst = [] # 그 다움 내부리스트에 새로운 값들을 저장하기 위해 초기화
 
     m_savest2 = miribogi()
     m_result2 = miribogi.objects.all()
 
+    """
+        1. 이하 코드는 프론트단에서 체크하고 "대기하기" 누를 경우, 해당 데이터의 value값들을 미리보기 클래스모델에 저장하기 위한 알고리즘임
+        2. 우선, HTML(index.html)에서 input 태그의 value를 {{displayst.id}}로 설정했으므로
+        3. 여기서 int(request.POST.get("check"))를 통해 체크하여 대기하기된 데이터의 id를 불러와 m_umhaha에 저장
+        4. 이후 반복문을 통해 이중리스트인 m_lst2의 길이만큼 돌고, if문을 통해 check된 id값을 찾을 경우에
+        5. 또 다른 반복문을 통해 해당 id가 있는 데이터의 10가지 value 값들을 m_nebonegi 빈 리스트에 저장
+        6. 이렇게 저장한 m_nebonegi 리스트를, 미리보기 클래스모델인 m_savest2의 10가지 value에 각각 저장
+    """
     m_nebonegi = []
     if request.method == "POST":
         if request.POST.get("check"):
@@ -46,6 +54,12 @@ def stdisplay(request):
 
             m_savest2.save()
 
+    """
+        1. 이하 코드는 HTML에서 미리보기 모달창 가장 아래인 "대기"에 해당하는 데이터를 구성하기 위한 코드임
+        2. 우선, m_result2는 이렇게 저장한 m_savest2(미리보기 클래스모델)을 object.all()한 것임 
+        3. 이후 반복문과 조건문을 통해 m_result의 가장 마지막 인덱스를 zz라는 새로운 변수에 저장
+        4. 이렇게 해서, 나중에 zz의 value값들을 HTML 상에서 띄울 수 있는 여건을 마련
+    """
     zz=0
 
     for i in range(0, len(m_result2)):
@@ -55,12 +69,15 @@ def stdisplay(request):
 
    # ===================================================================================================================================
 
+    """
+        이하 코드는 미리보기 클래스모델에 저장한 데이터를 HTML 상에서 최종화면에 해당하는 zebal 클래스모델에 저장하기 위한 코드임
+    """
     haha = crudstudent.objects.values()
-    haha = list(haha) # QuerySet을 리스트로 변환
-    lst = [] # 곧 만들 이중리스트의 내부 리스트에 해당
+    haha = list(haha) # QuerySet인 haha를 리스트의 형태로 변환
+    lst = [] # 곧 만들 이중리스트의 내부리스트에 해당
     lst2 = [] # 곧 만들 이중리스트에 해당
     for i in haha: # models.py에 있는 crudstudent db의 object들의 value 값들을 하나씩 돌며 반복
-        for j in i.values(): # value 값들의 value값들을 하나씩 돌며 반복하여 내부리스트에 저장
+        for j in i.values(): # value 값들의 value 값들을 하나씩 돌며 반복하여 내부리스트에 저장
             lst.append(j)
         lst2.append(lst) # 내부리스트에 저장된 값들을 이중리스트에 저장
         lst = [] # 그 다움 내부리스트에 새로운 값들을 저장하기 위해 초기화
@@ -88,6 +105,11 @@ def stdisplay(request):
             savest2.imageFile2 = zz.imageFile3
             savest2.save()
 
+    """
+        1. 보안을 위해 '닷엔브'와 'os.environ.get'메소드를 사용하였지만, 서버상에서 정상 작동안함
+        2. 따라서 콤마 뒤에 값을 Default 값으로 일단 설정했으나 이 역시 제 3자가 개발자도구로 볼 수 있음
+        3. 이에 대해서 추후에 해결이 필요함
+    """
     EDIT_P = os.environ.get('EDIT_PASSWORD', '1423')
     DELETE_P = os.environ.get('DELETE_PASSWORD', '1423')
     EXPORT_P = os.environ.get('EXPORT_PASSWORD', '1423')
@@ -134,16 +156,8 @@ def stdelete(request,id):
     result=crudstudent.objects.all()
 
     delete_flag = 1
-    # stdisplay처럼 index.html로 render하기 때문에 stdisplay가 넘긴 값들을 동일하게 넘겨주어야함
 
-    m_result2 = miribogi.objects.all()
-    result2 = zebal.objects.all()
-    zz = 0
-    for i in range(0, len(m_result2)):
-        if i == len(m_result2) - 1:
-            zz = m_result2[i]
-
-    return render(request,"index.html",{"crudstudent":result, "zebal":result2, "z":zz, "m_result2":m_result2, "delete_flag":delete_flag})
+    return render(request,"index.html",{"crudstudent":result, "delete_flag":delete_flag})
 
 def stdelete2(request,id):
     deletestudent2 = zebal.objects.get(id=id)
@@ -151,17 +165,8 @@ def stdelete2(request,id):
     result2 = zebal.objects.all()
 
     delete_flag = 1
-    # stdisplay처럼 index.html로 render하기 때문에 stdisplay가 넘긴 값들을 동일하게 넘겨주어야함
 
-    result=crudstudent.objects.all()
-
-    m_result2 = miribogi.objects.all()
-    zz = 0
-    for i in range(0, len(m_result2)):
-        if i == len(m_result2) - 1:
-            zz = m_result2[i]
-
-    return render(request,"index.html",{"crudstudent":result, "zebal":result2, "z":zz, "m_result2":m_result2, "delete_flag":delete_flag})
+    return render(request,"index.html",{"zebal":result2, "delete_flag":delete_flag})
 
 # =====================================================================================================================
 
@@ -173,13 +178,13 @@ def index(request):
 
 def register(request):
     form = UserCreationForm
-    user_flag = 0
+    user_flag = 0 # 회원가입 폼 제출 못할 경우, 추후 HTML(register.html) 상에서 Admin 암호 prompt 창을 계속 띄우기 위해 user_flag 설정
     if request.method == 'POST':
         regForm=UserCreationForm(request.POST)
         if regForm.is_valid():
             regForm.save()
             messages.success(request, 'User has been registered.')
-            user_flag = 1
+            user_flag = 1 # 회원가입 폼 제출 성공하여, user_flag가 1이 됨에따라, 추후 HTML(register.html)에서 암호 prompt 자동생성 방지
     ADMIN_P = os.environ.get('ADMIN_PASSWORD', '1423')
 
     return render(request, 'register.html',{'form':form, 'user_flag':user_flag, 'ADMIN_P':ADMIN_P})

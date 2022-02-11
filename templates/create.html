@@ -43,6 +43,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+<!-- 이하 3개의 script 태그 안에 있는 코드 및 링크는 CRC32 변환 알고리즘임. 실제 변환해주는 사이트를 보고 참고했음. -->
   <script>
       if (location.hostname != 'localhost') {
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
@@ -258,10 +259,11 @@
     <input type="Submit" name="submit" value="추가하기"> |
     <a style="color: blue; font-size: 18px; text-decoration: none;" href="{% url 'stdisplay'%}"> 홈으로 이동 </a>
     <hr>
+    <!-- "추가하기"를 누를 경우, 성공적으로 추가하였다는 메시지 출력. 메시지 내용(result)은 views.py에서 설정할 수 있음.-->
     {% if messages %}
-    {%for result in messages %}
-    <b style="color:red">{{result}}</b>
-    {% endfor %}
+      {%for result in messages %}
+      <b style="color:red">{{result}}</b>
+      {% endfor %}
     {% endif %}
     </form>
 
@@ -271,6 +273,7 @@
 
     </center>
 </body>
+<!-- 이하 2개의 script 또한 crc변환 관련 코드 -->
 <script src="https://cdn.jsdelivr.net/gh/emn178/js-crc/build/crc.min.js"></script>
 <script>method = crc32;</script>
 </html>

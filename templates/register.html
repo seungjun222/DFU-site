@@ -28,7 +28,7 @@
           width: 200px;
           height: 59.3px
         }
-
+        /* HTML에서 가져온 구글 폰트 link와 더불어 CSS에서 아래와 같이 작성해줘야 폰트가 적용됨 */
         *{
           font-family: 'Gowun Dodum', sans-serif;
         }
@@ -49,8 +49,9 @@
         <a id="register_link" style="color: blue; font-size: 20px; text-decoration: none; display:inline;" href="">회원가입</a>
         <a id="login_link" style="color: blue; font-size: 20px; text-decoration: none; display:inline; margin-left: 20px;" href="{% url 'login' %}">로그인</a>
     </center>
-    <!-- Admin 암호 입력 x의 경우 안보이고, o의 경우 보이게 설정 -->
+    <!-- Admin 암호 제대로 입력하면 보이게, 입력 못하면 안보이게 설정  -->
     <div id="main_div" style="display: none;">
+        <!-- 장고에서 제공하는 회원가입 양식 띄우기 -->
         {% if messages %}
             {% for message in messages %}
                 <p>{{message}}</p>
@@ -83,9 +84,5 @@
         alert("암호가 일치하지 않습니다.")
     }
 
-    console.log({{ADMIN_P}});
-    console.log(typeof {{ADMIN_P}});
-
-    console.log(typeof pw);
 </script>
 </html>

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from crud.models import crudstudent, zebal, miribogi
+from crud.models import crudstudent, zebal, miribogi, AdminPassword
 from django.contrib import messages
 from crud.forms import stform
 
@@ -110,9 +110,19 @@ def stdisplay(request):
         2. 따라서 콤마 뒤에 값을 Default 값으로 일단 설정했으나 이 역시 제 3자가 개발자도구로 볼 수 있음
         3. 이에 대해서 추후에 해결이 필요함
     """
-    EDIT_P = os.environ.get('EDIT_PASSWORD', '1423')
-    DELETE_P = os.environ.get('DELETE_PASSWORD', '1423')
-    EXPORT_P = os.environ.get('EXPORT_PASSWORD', '1423')
+    EDIT_P = os.environ.get('EDIT_PASSWORD', '1234')
+    DELETE_P = os.environ.get('DELETE_PASSWORD', '1234')
+    EXPORT_P = os.environ.get('EXPORT_PASSWORD', '1234')
+
+    """
+        추후 작성
+    """
+    ap = AdminPassword()
+
+    if request.method == "POST":
+        if request.POST.get("logout"):
+            ap.password = "4444"
+            ap.save()
 
     return render(request,"index.html",{"crudstudent":result, "zebal":result2, "z":zz, "m_result2":m_result2, "delete_flag":delete_flag, "EDIT_P":EDIT_P, "DELETE_P":DELETE_P, "EXPORT_P":EXPORT_P})
 
@@ -179,15 +189,34 @@ def index(request):
 def register(request):
     form = UserCreationForm
     user_flag = 0 # 회원가입 폼 제출 못할 경우, 추후 HTML(register.html) 상에서 Admin 암호 prompt 창을 계속 띄우기 위해 user_flag 설정
+
     if request.method == 'POST':
         regForm=UserCreationForm(request.POST)
         if regForm.is_valid():
             regForm.save()
             messages.success(request, 'User has been registered.')
             user_flag = 1 # 회원가입 폼 제출 성공하여, user_flag가 1이 됨에따라, 추후 HTML(register.html)에서 암호 prompt 자동생성 방지
-    ADMIN_P = os.environ.get('ADMIN_PASSWORD', '1423')
 
-    return render(request, 'register.html',{'form':form, 'user_flag':user_flag, 'ADMIN_P':ADMIN_P})
+        """
+            추후 작성
+        """
+
+        if request.POST.get('password'):
+            ap = AdminPassword()
+            ap.password = request.POST.get('password')
+            ap.save()
+
+    """
+        추후 작성
+    """
+
+    apShow = AdminPassword.objects.all()
+
+    for i in range(0, len(apShow)):
+        if i == len(apShow) - 1:
+            apLast = apShow[i]
+
+    return render(request, 'register.html',{'form':form, 'user_flag':user_flag, 'apLast':apLast})
 
 def stlogin(request):
     return render(request, './registration/login.html')

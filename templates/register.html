@@ -32,6 +32,9 @@
         *{
           font-family: 'Gowun Dodum', sans-serif;
         }
+        form, input{
+            font-size: 20px;
+        }
     </style>
 
   <!--    GOOGLE FONTS LINK   -->
@@ -46,11 +49,21 @@
         <h1>회원가입 페이지</h1>
         <hr>
         <br>
-        <a id="register_link" style="color: blue; font-size: 20px; text-decoration: none; display:inline;" href="">회원가입</a>
-        <a id="login_link" style="color: blue; font-size: 20px; text-decoration: none; display:inline; margin-left: 20px;" href="{% url 'login' %}">로그인</a>
+        <!-- Admin 암호 제대로 입력하면 보이게, 입력 못하면 안보이게 설정  -->
+        {% if apLast.password != '5555' %}
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" placeholder="Admin 비밀번호" name="password" value="">
+
+            <input  type="Submit" name="submit" value="입력">
+        </form>
+        <br>
+        <a id="login_link" style="color: blue; font-size: 20px; text-decoration: none; display:inline; margin-left: 20px;" href="{% url 'login' %}">로그인 페이지로 이동</a>
+        {% endif %}
     </center>
-    <!-- Admin 암호 제대로 입력하면 보이게, 입력 못하면 안보이게 설정  -->
-    <div id="main_div" style="display: none;">
+
+    {% if apLast.password == '5555' %}
+    <div id="main_div">
         <!-- 장고에서 제공하는 회원가입 양식 띄우기 -->
         {% if messages %}
             {% for message in messages %}
@@ -61,28 +74,31 @@
             {% csrf_token %}
             {{form.as_p}}
             <input id="register_input" type="submit" value="회원가입"/>
+            <a style="color: blue; font-size: 20px; text-decoration: none; display:inline; margin-left: 20px;" href="{% url 'login' %}">로그인 페이지로 이동</a>
         </form>
     </div>
+    {% endif %}
+
 </body>
 <script>
-    const main_div = document.getElementById("main_div");
-    const register_link = document.getElementById("register_link");
-    const login_link = document.getElementById("login_link");
+<!--    const main_div = document.getElementById("main_div");-->
+<!--    const register_link = document.getElementById("register_link");-->
+<!--    const login_link = document.getElementById("login_link");-->
 
-    console.log({{user_flag}});
+<!--    console.log({{user_flag}});-->
 
-    if({{user_flag}} == 0){
-        pw = prompt("회원가입을 진행하려면 Admin 암호를 입력하세요.");
-    }
+<!--    if({{user_flag}} == 0){-->
+<!--        pw = prompt("회원가입을 진행하려면 Admin 암호를 입력하세요.");-->
+<!--    }-->
 
-    if(pw=={{ADMIN_P}}){
-        confirm("Admin 인증 성공!")
-        main_div.style.display = "block";
-        register_link.style.display = "none";
-        login_link.style.display = "none";
-    }else{
-        alert("암호가 일치하지 않습니다.")
-    }
+<!--    if(pw=={{ADMIN_P}}){-->
+<!--        confirm("Admin 인증 성공!")-->
+<!--        main_div.style.display = "block";-->
+<!--        register_link.style.display = "none";-->
+<!--        login_link.style.display = "none";-->
+<!--    }else{-->
+<!--        alert("암호가 일치하지 않습니다.")-->
+<!--    }-->
 
 </script>
 </html>

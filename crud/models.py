@@ -42,3 +42,6 @@ class miribogi(models.Model):
     uploadedFile3 = models.FileField(upload_to='')
     crc3=models.CharField(max_length=100)
     imageFile3 = models.FileField(upload_to='')
+
+class AdminPassword(models.Model):
+    password = models.CharField(max_length=10)

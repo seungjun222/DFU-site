@@ -145,7 +145,11 @@
       <!-- 로그인 했을 경우 "로그아웃" 띄우고, 로그아웃 했을 경우 "로그인"과 "회원가입" 띄우기 -->
       {% if user.is_authenticated %}
       <span>현재 접속 ID : {{user}} 님</span>　 |　
-      <a style="color: blue; text-decoration:none;" href="{% url 'logout' %}">로그아웃</a>
+      <a style="color: blue; text-decoration:none;" href="{% url 'logout' %}">로그아웃</a>　 |　
+      <form style="display: inline;" method="post">
+        {% csrf_token %}
+        <input style="color:#ff6289; font-weight: bold;" id="logout" name="logout" type="submit" value="Admin 로그아웃"/>
+      </form>
       {% else %}
       <a style="color: blue; text-decoration:none;" href="{% url 'login' %}">로그인</a>　|　
       <a style="color: blue; text-decoration:none;" href="{% url 'register' %}">회원가입</a>
@@ -343,6 +347,11 @@
     */
     if({{delete_flag}} == 1){
         window.location.href="{% url 'stdisplay' %}";
+    }
+
+    const logout = document.getElementById("logout");
+    logout.onclick = () => {
+        confirm("Admin 로그아웃 성공!")
     }
 
 </script>

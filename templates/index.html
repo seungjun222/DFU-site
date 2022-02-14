@@ -84,7 +84,7 @@
     }
 
     #close1{
-      background-color: rgb(225, 225, 225);
+      background-color: rgb(239, 239, 239);
       border: 2px solid black;
       padding: 7px;
       font-weight: bold;
@@ -144,15 +144,15 @@
     <div id="login_register">
       <!-- 로그인 했을 경우 "로그아웃" 띄우고, 로그아웃 했을 경우 "로그인"과 "회원가입" 띄우기 -->
       {% if user.is_authenticated %}
-      <span>현재 접속 ID : {{user}} 님</span>　 |　
+      <span>현재 접속 ID : <strong>{{user}}</strong> 님</span>　 |　
       <a style="color: blue; text-decoration:none;" href="{% url 'logout' %}">로그아웃</a>　 |　
       <form style="display: inline;" method="post">
         {% csrf_token %}
-        <input style="color:#ff6289; font-weight: bold;" id="logout" name="logout" type="submit" value="Admin 로그아웃"/>
+        <input style="color:#ff6289; font-weight: bold; background-color:;" id="logout" name="logout" type="submit" value="Admin 로그아웃"/>
       </form>
       {% else %}
-      <a style="color: blue; text-decoration:none;" href="{% url 'login' %}">로그인</a>　|　
-      <a style="color: blue; text-decoration:none;" href="{% url 'register' %}">회원가입</a>
+      <a style="color: blue; text-decoration:none; font-weight: bold;" href="{% url 'login' %}">로그인</a>　|　
+      <a style="color: blue; text-decoration:none; font-weight: bold;" href="{% url 'register' %}">회원가입</a>
       {% endif %}
     </div>
     <hr>
@@ -182,7 +182,7 @@
       <tr>
         <td><input type="checkbox" name="check" value="{{displayst.id}}"></td>
         <td>{{displayst.name_ko}}</td>
-        <td>{{displayst.time}}</td>
+        <td>{{displayst.time|date:'Y-m-d-H:i'}}</td>
         <td>{{displayst.name_en}}</td>
         <td>{{displayst.service}}</td>
         <td>{{displayst.product}}</td>
@@ -193,8 +193,8 @@
         <td>{{displayst.imageFile}}</td>
         <td><a style="color:blue;" href="{{displayst.imageFile.url}}" download="">{{displayst.imageFile}}</a></td>
 
-        <td><a style="color:#ff6289; text-decoration: none;" class="ee" href="/Edit/{{displayst.id}}" >수정</a></td>
-        <td><a style="color:#ff6289; text-decoration: none;" class="dd1" href="/Delete/{{displayst.id}}">삭제</a></td>
+        <td><a style="color:#ff6289; text-decoration: none; font-weight: bold;" class="ee" href="/Edit/{{displayst.id}}" >수정</a></td>
+        <td><a style="color:#ff6289; text-decoration: none; font-weight: bold;" class="dd1" href="/Delete/{{displayst.id}}">삭제</a></td>
       </tr>
       {% endfor %}
       <tr>
@@ -235,16 +235,16 @@
   <!-- 특정 버튼 선택할 시에만 나타나는 모달창 구성 -->
   <div class="modal-wrapper" id="modal" style="display: none;">
     <div class="modal">
-      <div><strong>&lt미리보기&gt</strong></div>
+      <div><strong>&lt미리보기&gt</strong><strong style="color: #00549f; margin-left: 10px;">(대기에 해당하는 데이터는 가장 최근에 "대기하기"한 항목)</strong></div>
       <div>
         <!-- zebal 모델에 저장된 데이터들을 반복문을 통해 모두 불러오기. zebal은 최종화면 DB라고 생각하면 됨. -->
         {% for i in zebal%}
-        <p><a style="color:#ff6289; text-decoration: none;" class="dd2" href="/Delete2/{{i.id}}">삭제</a> - {{i.name_ko2}},{{i.time2}},{{i.name_en2}},{{i.service2}},{{i.product2}},{{i.device2}},{{i.uploadedFile2}},{{i.crc2}},<a style="color:blue;" href="{{i.uploadedFile2.url}}" download="">{{i.uploadedFile2}}</a>,{{i.imageFile2}},<a style="color:blue;" href="{{i.imageFile2.url}}" download="">{{i.imageFile2}}</a></p>
+        <p><a style="color:#ff6289; text-decoration: none; font-weight: bold;" class="dd2" href="/Delete2/{{i.id}}">삭제</a> - {{i.name_ko2}},{{i.time2|date:'Y-m-d-H:i'}},{{i.name_en2}},{{i.service2}},{{i.product2}},{{i.device2}},{{i.uploadedFile2}},{{i.crc2}},<a style="color:blue;" href="{{i.uploadedFile2.url}}" download="">{{i.uploadedFile2}}</a>,{{i.imageFile2}},<a style="color:blue;" href="{{i.imageFile2.url}}" download="">{{i.imageFile2}}</a></p>
         {% endfor %}
       </div>
       <hr>
       <!-- views.py에서 넘겨준 z값을 불러옴. z는 zebal 모델에 저장된 가장 마지막 인텍스의 데이터임. -->
-      <div><span style="color: #00549f;">대기</span> - {{z.name_ko3}},{{z.time3}},{{z.name_en3}},{{z.service3}},{{z.product3}},{{z.device3}},{{z.uploadedFile3}},{{z.crc3}},<a style="color:blue;" href="{{z.uploadedFile3.url}}" download="">{{z.uploadedFile3}}</a>,{{z.imageFile3}},<a style="color:blue;" href="{{z.imageFile3.url}}" download="">{{z.imageFile3}}</a></div>
+      <div><strong style="color: #00549f;">대기</strong> - {{z.name_ko3}},{{z.time3|date:'Y-m-d-H:i'}},{{z.name_en3}},{{z.service3}},{{z.product3}},{{z.device3}},{{z.uploadedFile3}},{{z.crc3}},<a style="color:blue;" href="{{z.uploadedFile3.url}}" download="">{{z.uploadedFile3}}</a>,{{z.imageFile3}},<a style="color:blue;" href="{{z.imageFile3.url}}" download="">{{z.imageFile3}}</a></div>
 
       <div id="sticky_div">
          <form method="post" id="html_form" onsubmit="return false">

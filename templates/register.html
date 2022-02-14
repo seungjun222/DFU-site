@@ -53,8 +53,8 @@
         {% if apLast.password != '5555' %}
         <form method="post">
             {% csrf_token %}
+            <div style="margin-bottom: 20px;">회원가입하려면 Admin 비밀번호를 입력하세요</div>
             <input type="text" placeholder="Admin 비밀번호" name="password" value="">
-
             <input  type="Submit" name="submit" value="입력">
         </form>
         <br>
@@ -67,9 +67,10 @@
         <!-- 장고에서 제공하는 회원가입 양식 띄우기 -->
         {% if messages %}
             {% for message in messages %}
-                <p>{{message}}</p>
+                <p style="color:red; font-weight: bold;">{{message}}</p>
             {% endfor %}
         {% endif %}
+
         <form method="post" action="">
             {% csrf_token %}
             {{form.as_p}}

@@ -212,6 +212,7 @@ def register(request):
 
     apShow = AdminPassword.objects.all()
 
+    apLast = 0
     for i in range(0, len(apShow)):
         if i == len(apShow) - 1:
             apLast = apShow[i]

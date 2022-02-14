@@ -148,7 +148,7 @@
       <a style="color: #00549f; text-decoration:none; font-weight: bold;" href="{% url 'logout' %}">로그아웃</a>　 |　
       <form style="display: inline;" method="post">
         {% csrf_token %}
-        <input style="color:#ff6289; font-weight: bold; background-color:;" id="logout" name="logout" type="submit" value="Admin 로그아웃"/>
+        <input style="color:#ff6289; font-size: 14px; font-weight: bold; padding: 5px 10px;" id="logout" name="logout" type="submit" value="Admin 로그아웃"/>
       </form>
       {% else %}
       <a style="color: #00549f; text-decoration:none; font-weight: bold;" href="{% url 'login' %}">로그인</a>　|　

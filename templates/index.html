@@ -117,6 +117,11 @@
       width: 34px;
     }
 
+    .pin{
+      width: 24px;
+      margin-right: 10px;
+    }
+
     #login_register{
       position: absolute;
       top: 30px;
@@ -138,6 +143,10 @@
     #readme p{
       font-size : 19px;
     }
+
+    #logout:hover{
+      cursor: pointer;
+    }
   </style>
 
   <!--    GOOGLE FONTS LINK   -->
@@ -156,7 +165,7 @@
       <a style="color: #00549f; text-decoration:none; font-weight: bold;" href="{% url 'logout' %}">로그아웃</a>　 |　
       <form style="display: inline;" method="post">
         {% csrf_token %}
-        <input style="color:#ff6289; font-size: 14px; font-weight: bold; padding: 5px 10px;" id="logout" name="logout" type="submit" value="Admin 로그아웃"/>
+        <input style="color: white; font-size: 15px; background-color: #00549f; font-weight: bold; padding: 5px 10px;" id="logout" name="logout" type="submit" value="Admin 로그아웃"/>
       </form>
       {% else %}
       <a style="color: #00549f; text-decoration:none; font-weight: bold;" href="{% url 'login' %}">로그인</a>　|　
@@ -224,28 +233,28 @@
   <div id="readme">
     <hr>
     <h2><img src="/static/img/star.png" class="star" alt="별"> 기능 소개</h2>
-    <p>▶ <strong>1. 추가하기 -</strong> <strong>메인 페이지의 DB</strong> 테이블에 제품을 새로 등록</p>
-    <p>▶ <strong>2. 대기하기 -</strong> 선택한 데이터를 <strong>미리보기 DB</strong>에 제출</p>
-    <p>▶ <strong>3. 미리보기 -</strong> 최종화면의 데이터와 가장 마지막으로 대기하기한 1개의 데이터를 모두 보여줌</p>
-    <p>▶ <strong>4. 내보내기 -</strong> 미리보기 안에 있는 내보내기 버튼으로서, 마지막으로 대기하기한 데이터를 <strong>최종화면 DB</strong>에 등록</p>
-    <p>▶ <strong>5. 최종화면 -</strong> 최종적으로 내보낸 데이터들을 텍스트 형식으로 새 창에 보여줌</p>
+    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>추가하기 -</strong> <strong>메인 페이지의 DB</strong> 테이블에 제품을 새로 등록</p>
+    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>대기하기 -</strong> 선택한 데이터를 <strong>미리보기 DB</strong>에 제출</p>
+    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>미리보기 -</strong> 최종화면의 데이터와 가장 마지막으로 대기하기한 1개의 데이터를 모두 미리 보여줌</p>
+    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>내보내기 -</strong> 미리보기 안에 있는 내보내기 버튼으로서, 마지막으로 대기하기한 데이터를 <strong>최종화면 DB</strong>에 등록</p>
+    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>최종화면 -</strong> 최종적으로 내보낸 데이터들을 텍스트 형식으로 새 창에 보여줌</p>
     <hr>
     <h2><img src="/static/img/star.png" class="star" alt="별"> 이용 순서</h2>
-    <p>▶ <strong>1.추가하기(생략가능) → 2.데이터 선택 후 대기하기 → 3.미리보기 → 4.내보내기 → 5.최종화면</strong></p>
+    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong style="color:#ff6289;">추가하기</strong>(생략가능)<strong> → <span style="color: #ff6289;">대기하기</span></strong>(데이터 선택 후)<strong> → <span style="color: #ff6289;">미리보기</span> → <span style="color: #ff6289;">내보내기</span> → <span style="color: #ff6289;">최종화면</span></strong></p>
     <hr>
     <h2><img src="/static/img/star.png" class="star" alt="별"> 유의 사항</h2>
-    <p>▶ <strong>"대기하기"</strong>와 <strong>"내보내기"</strong>는 <strong>1개씩만</strong> 가능</p>
-    <p>▶ <strong>아무것도 선택하지 않고 "대기하기"</strong>를 누를 경우 완료 문구는 뜨지만, 실제로 대기하기 되지는  않음</p>
-    <p>▶ 미리보기 안에 <strong>"대기"</strong>에 해당하는 데이터는 <strong>가장 최근에 "대기하기"한 항목임</strong></p>
-    <p>▶ ┗> 대기를 내보내기 하더라도 <strong>"대기"</strong>는 바뀌지 않음<strong>(새로 다른 것을 "대기하기"해야 바뀜)</strong></p>
-    <p>▶ 사이트 이용 종료 시 보안을 위해 <strong>"Admin 로그아웃"</strong> 먼저 클릭 후, 그 옆에 있는 <strong>"로그아웃"</strong> 클릭하기</p>
+    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>"대기하기"</strong>와 <strong>"내보내기"</strong>는 <strong>1개씩만</strong> 가능</p>
+    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>아무것도 선택하지 않고 "대기하기"</strong>를 누를 경우 완료 문구는 뜨지만, 실제로 대기하기 되지는  않음</p>
+    <p><img src="/static/img/pin.png" class="pin" alt="핀"> 미리보기 안에 <strong>"대기"</strong>에 해당하는 데이터는 <strong>가장 최근에 "대기하기"한 항목임</strong></p>
+    <p><img src="/static/img/pin.png" class="pin" alt="핀"> ┗> 대기를 내보내기 하더라도 <strong>"대기"</strong>는 바뀌지 않음<strong>(새로 다른 것을 "대기하기"해야 바뀜)</strong></p>
+    <p><img src="/static/img/pin.png" class="pin" alt="핀"> 사이트 이용 종료 시 보안을 위해 <strong>"Admin 로그아웃"</strong> 먼저 클릭 후, 그 옆에 있는 <strong>"로그아웃"</strong> 클릭하기</p>
   </div>
   <br>
 
   <!-- 특정 버튼 선택할 시에만 나타나는 모달창 구성 -->
   <div class="modal-wrapper" id="modal" style="display: none;">
     <div class="modal">
-      <div><strong>&lt미리보기&gt</strong><strong style="color: #00549f; margin-left: 10px;">(대기에 해당하는 데이터는 가장 최근에 "대기하기"한 항목)</strong></div>
+      <div><strong>&lt최종화면 미리보기&gt</strong><strong style="color: #00549f; margin-left: 10px;">(대기에 해당하는 데이터는 가장 최근에 "대기하기"한 항목)</strong></div>
       <div>
         <!-- zebal 모델에 저장된 데이터들을 반복문을 통해 모두 불러오기. zebal은 최종화면 DB라고 생각하면 됨. -->
         {% for i in zebal%}

@@ -53,7 +53,7 @@
             1. views.py의 def register에서 apLast변수를 받아옴. 이는 Admin 비밀번호 DB의 마지막 인덱스 값
             2. Admin 암호 제대로 입력하면 보이게, 그렇지 않으면 안 보이게 설정
         -->
-        {% if apLast.password != '5555' %}
+        {% if apLast.password != core %}
         <form method="post">
             {% csrf_token %}
             <div style="margin-bottom: 20px;">회원가입하려면 Admin 비밀번호를 입력하세요</div>
@@ -61,11 +61,11 @@
             <input  type="Submit" style="font-weight: bold;" name="submit" value="입력">
         </form>
         <br>
-        <a id="login_link" style="color: blue; font-weight: bold; font-size: 20px; text-decoration: none; display:inline; " href="{% url 'login' %}">로그인 페이지로 이동</a>
+        <a id="login_link" style="color: #00549f; font-weight: bold; font-size: 20px; text-decoration: none; display:inline;" href="{% url 'login' %}" class="{{core}}">로그인 페이지로 이동</a>
         {% endif %}
     </center>
 
-    {% if apLast.password == '5555' %}
+    {% if apLast.password == core %}
     <div id="main_div">
         <!-- 장고에서 제공하는 회원가입 양식 띄우기 -->
         {% if messages %}
@@ -78,31 +78,9 @@
             {% csrf_token %}
             {{form.as_p}}
             <input id="register_input" type="submit" value="회원가입"/>
-            <a style="color: blue; font-weight: bold; font-size: 20px; text-decoration: none; display:inline; margin-left: 20px;" href="{% url 'login' %}">로그인 페이지로 이동</a>
+            <a style="color: #00549f; font-weight: bold; font-size: 20px; text-decoration: none; display:inline; margin-left: 20px;" href="{% url 'login' %}">로그인 페이지로 이동</a>
         </form>
     </div>
     {% endif %}
-
 </body>
-<script>
-<!--    const main_div = document.getElementById("main_div");-->
-<!--    const register_link = document.getElementById("register_link");-->
-<!--    const login_link = document.getElementById("login_link");-->
-
-<!--    console.log({{user_flag}});-->
-
-<!--    if({{user_flag}} == 0){-->
-<!--        pw = prompt("회원가입을 진행하려면 Admin 암호를 입력하세요.");-->
-<!--    }-->
-
-<!--    if(pw=={{ADMIN_P}}){-->
-<!--        confirm("Admin 인증 성공!")-->
-<!--        main_div.style.display = "block";-->
-<!--        register_link.style.display = "none";-->
-<!--        login_link.style.display = "none";-->
-<!--    }else{-->
-<!--        alert("암호가 일치하지 않습니다.")-->
-<!--    }-->
-
-</script>
 </html>

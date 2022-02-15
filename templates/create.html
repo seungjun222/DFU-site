@@ -256,8 +256,8 @@
       </tr>
     </table>
 
-    <input type="Submit" name="submit" value="추가하기"> |
-    <a style="color: blue; font-size: 18px; text-decoration: none;" href="{% url 'stdisplay'%}"> 홈으로 이동 </a>
+    <input type="Submit" style="font-weight: bold;" name="submit" value="추가하기"> |
+    <a style="color: #00549f; font-size: 18px; font-weight: bold; text-decoration: none;" href="{% url 'stdisplay'%}"> 홈으로 이동 </a>
     <hr>
     <!-- "추가하기"를 누를 경우, 성공적으로 추가하였다는 메시지 출력. 메시지 내용(result)은 views.py에서 설정할 수 있음.-->
     {% if messages %}

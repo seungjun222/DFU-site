@@ -221,7 +221,8 @@ def register(request):
         if i == len(apShow) - 1:
             apLast = apShow[i]
 
-    return render(request, 'register.html',{'form':form, 'user_flag':user_flag, 'apLast':apLast})
+    core = "6666"
+    return render(request, 'register.html',{'form':form, 'user_flag':user_flag, 'apLast':apLast, 'core':core})
 
 def stlogin(request):
     return render(request, './registration/login.html')

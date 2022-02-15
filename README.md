@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 <h2><img src="https://user-images.githubusercontent.com/39702832/153997428-840673a8-73a9-4206-a4bd-4fe6e7fd2c96.png" width="24"> 데이터 CRUD 사이트</h2>
-=======
-<h2>user-images.githubusercontent.com/39702832/153997428-840673a8-73a9-4206-a4bd-4fe6e7fd2c96.png 데이터 CRUD 사이트</h2>
->>>>>>> 36e492d5225437d68deb3688f9cbf3f47da6ed68
 <hr>
 <h2>★ 사용 언어, 프레임워크, 데이터베이스, 클라우드 플랫폼</h2>
 <h4>● Frontend - HTML, CSS, Javascript</h4>
@@ -20,11 +16,7 @@
 <hr>
 
 <h2>★ 사이트 주소</h2>
-<<<<<<< HEAD
-<h4>[http://13.124.142.118](http://13.124.142.118)</h4>
-=======
-<http://13.124.142.118>
->>>>>>> 36e492d5225437d68deb3688f9cbf3f47da6ed68
+<h4>[DFU 파일 관리 사이트](http://13.124.142.118)</h4>
 <p>※ Admin 암호 입력해야 이용 가능</p>
 <hr>
 

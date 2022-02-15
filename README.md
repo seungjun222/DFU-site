@@ -16,7 +16,7 @@
 <hr>
 
 <h2><img src="https://user-images.githubusercontent.com/39702832/153999580-a6323f49-62e4-4fff-b27f-29fbc8fd80eb.png" width="24"> 사이트 주소</h2>
-<strong><a href="[http://13.124.142.118]" target="_blank">DFU 파일 관리 사이트</a></strong>
+<a href="[http://13.124.142.118]" target="_blank">DFU 파일 관리 사이트</a>
 <p>※ Admin 암호 입력해야 이용 가능</p>
 <hr>
 

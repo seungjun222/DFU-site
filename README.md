@@ -1,4 +1,4 @@
-<h2>![star](https://user-images.githubusercontent.com/39702832/153997428-840673a8-73a9-4206-a4bd-4fe6e7fd2c96.png) 데이터 CRUD 사이트</h2>
+<h2>user-images.githubusercontent.com/39702832/153997428-840673a8-73a9-4206-a4bd-4fe6e7fd2c96.png 데이터 CRUD 사이트</h2>
 <hr>
 <h2>★ 사용 언어, 프레임워크, 데이터베이스, 클라우드 플랫폼</h2>
 <h4>● Frontend - HTML, CSS, Javascript</h4>

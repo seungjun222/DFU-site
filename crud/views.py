@@ -157,7 +157,7 @@ def stupdate(request,id):
     form=stform(request.POST,instance=stupdate)
     if form.is_valid():
         form.save()
-        messages.success(request,"정상적으로 수정이 완료되었습니다!")
+        messages.success(request,"수정이 정상적으로 완료되었습니다!")
         return render(request,"edit.html",{"crudstudent":stupdate})
 
 def stdelete(request,id):
@@ -194,11 +194,13 @@ def register(request):
         regForm=UserCreationForm(request.POST)
         if regForm.is_valid():
             regForm.save()
-            messages.success(request, 'User has been registered.')
+            messages.success(request, '회원가입이 정상적으로 완료되었습니다!.')
             user_flag = 1 # 회원가입 폼 제출 성공하여, user_flag가 1이 됨에따라, 추후 HTML(register.html)에서 암호 prompt 자동생성 방지
 
         """
-            추후 작성
+            1. models.py에서 AdminPassword라는 새로운 클래스모델 생성
+            2. 오직 admin 비밀번호를 저장하기 위한 데이터베이스
+            3. 사용자가 admin 비밀번호를 입력하면 받아와서 모두 저장함
         """
 
         if request.POST.get('password'):
@@ -207,12 +209,14 @@ def register(request):
             ap.save()
 
     """
-        추후 작성
+        1. 사용자가 admin 비밀번호를 정확히 입력했는지를 판단하기 위해 마지막 인덱스만을 추출
+        2. 추출한 마지막 인덱스를 apLast라는 변수에 저장하여 HTML(register.html)에 보냄
+        3. 추후 HTML(register.html)에서 장고 템플릿 문법 중 조건문을 통해, 비밀번호 정답 여부를 판별
     """
 
     apShow = AdminPassword.objects.all()
 
-    apLast = 0
+    apLast = 0 # apLast 값 초기화 선언 (이거 안하면 오류남)
     for i in range(0, len(apShow)):
         if i == len(apShow) - 1:
             apLast = apShow[i]

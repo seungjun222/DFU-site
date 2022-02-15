@@ -130,6 +130,10 @@
     *{
       font-family: 'Gowun Dodum', sans-serif;
     }
+
+    #readme p{
+      font-size : 19px;
+    }
   </style>
 
   <!--    GOOGLE FONTS LINK   -->
@@ -182,6 +186,7 @@
       <tr>
         <td><input type="checkbox" name="check" value="{{displayst.id}}"></td>
         <td>{{displayst.name_ko}}</td>
+        <!-- DateTimeField에 저장된 값 뒤에 |date:'Y-m-d-H:i' 와 같이 작성하여 필터링 -->
         <td>{{displayst.time|date:'Y-m-d-H:i'}}</td>
         <td>{{displayst.name_en}}</td>
         <td>{{displayst.service}}</td>
@@ -212,7 +217,7 @@
 
   </center>
   <br>
-  <div>
+  <div id="readme">
     <hr>
     <h2>★ 기능 소개</h2>
     <p>▶ <strong>1. 추가하기 -</strong> <strong>메인 페이지의 DB</strong> 테이블에 제품을 새로 등록</p>
@@ -222,13 +227,14 @@
     <p>▶ <strong>5. 최종화면 -</strong> 최종적으로 내보낸 데이터들을 텍스트 형식으로 새 창에 보여줌</p>
     <hr>
     <h2>★ 이용 순서</h2>
-    <p>▶ <strong>1.추가하기(생략가능) → 2.제품 선택 후 대기하기 → 3.미리보기 → 4.내보내기 → 5.최종화면</strong></p>
+    <p>▶ <strong>1.추가하기(생략가능) → 2.데이터 선택 후 대기하기 → 3.미리보기 → 4.내보내기 → 5.최종화면</strong></p>
     <hr>
     <h2>★ 유의 사항</h2>
-    <p>▶ 선택은 <strong>1개씩만</strong> 가능</p>
+    <p>▶ <strong>"대기하기"</strong>와 <strong>"내보내기"</strong>는 <strong>1개씩만</strong> 가능</p>
     <p>▶ <strong>아무것도 선택하지 않고 "대기하기"</strong>를 누를 경우 완료 문구는 뜨지만, 실제로 대기하기 되지는  않음</p>
-    <p>▶ 미리보기 안에 <strong>대기</strong>에 해당하는 데이터는 <strong>가장 최근에 "대기하기"한 항목임</strong></p>
-    <p>▶ ┗> 대기를 내보내기 하더라도 <strong>대기</strong>는 바뀌지 않음<strong>(새로 다른 것을 "대기하기"해야 바뀜)</strong></p>
+    <p>▶ 미리보기 안에 <strong>"대기"</strong>에 해당하는 데이터는 <strong>가장 최근에 "대기하기"한 항목임</strong></p>
+    <p>▶ ┗> 대기를 내보내기 하더라도 <strong>"대기"</strong>는 바뀌지 않음<strong>(새로 다른 것을 "대기하기"해야 바뀜)</strong></p>
+    <p>▶ 사이트 이용 종료 시 보안을 위해 <strong>"Admin 로그아웃"</strong> 먼저 클릭 후, 그 옆에 있는 <strong>"로그아웃"</strong> 클릭하기</p>
   </div>
   <br>
 

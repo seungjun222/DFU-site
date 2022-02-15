@@ -45,8 +45,8 @@
         <form method="post" action="">
             {% csrf_token %}
             {{form.as_p}}
-            <input style="padding:5px 10px; font-size:18px; " type="submit" value="로그인"/>
-            <a style="color: blue; font-size:18px; text-decoration: none; margin-left: 10px;" href="{% url 'register' %}">회원가입 페이지로 이동</a>
+            <input style="padding:5px 10px; font-weight: bold; font-size:18px; " type="submit" value="로그인"/>
+            <a style="color: blue; font-weight: bold; font-size:20px; text-decoration: none; margin-left: 10px;" href="{% url 'register' %}">회원가입 페이지로 이동</a>
         </form>
     </center>
 </body>

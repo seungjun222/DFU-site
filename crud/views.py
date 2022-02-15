@@ -110,9 +110,12 @@ def stdisplay(request):
         2. 따라서 콤마 뒤에 값을 Default 값으로 일단 설정했으나 이 역시 제 3자가 개발자도구로 볼 수 있음
         3. 이에 대해서 추후에 해결이 필요함
     """
-    EDIT_P = os.environ.get('EDIT_PASSWORD', '1234')
-    DELETE_P = os.environ.get('DELETE_PASSWORD', '1234')
-    EXPORT_P = os.environ.get('EXPORT_PASSWORD', '1234')
+    # EDIT_P = os.environ.get('EDIT_PASSWORD', '1234')
+    # DELETE_P = os.environ.get('DELETE_PASSWORD', '1234')
+    # EXPORT_P = os.environ.get('EXPORT_PASSWORD', '1234')
+    EDIT_P = '1234'
+    DELETE_P = '1234'
+    EXPORT_P = '1234'
 
     """
         추후 작성

@@ -1,11 +1,11 @@
 <h2><img src="https://user-images.githubusercontent.com/39702832/153997428-840673a8-73a9-4206-a4bd-4fe6e7fd2c96.png" width="24"> 데이터 CRUD 사이트</h2>
 <hr>
-<h2>★ 사용 언어, 프레임워크, 데이터베이스, 클라우드 플랫폼</h2>
+<h2><img src="https://user-images.githubusercontent.com/39702832/153999580-a6323f49-62e4-4fff-b27f-29fbc8fd80eb.png" width="24"> 사용 언어, 프레임워크, 데이터베이스, 클라우드 플랫폼</h2>
 <h4>● Frontend - HTML, CSS, Javascript</h4>
 <h4>● Backend - Django(Python), SQLite3, AWS(Lightsail) </h4>
 <hr>
 
-<h2>★ 기능 소개</h2>
+<h2><img src="https://user-images.githubusercontent.com/39702832/153999580-a6323f49-62e4-4fff-b27f-29fbc8fd80eb.png" width="24"> 기능 소개</h2>
 <h4>● Django에서 지원하는 회원가입 / 로그인 기능은 Admin 암호 입력해야만 실행</h4>
 <h4>● 데이터 CRUD (생성, 읽기, 수정, 삭제)</h4>
 <h4>● 데이터 등록 시 파일(~DFU.zip)에 대해 자동으로 CRC32 계산</h4>
@@ -15,12 +15,12 @@
 <h4>● 로그인 되어 있지 않으면 기본 index 페이지 보이지 않음</h4>
 <hr>
 
-<h2>★ 사이트 주소</h2>
+<h2><img src="https://user-images.githubusercontent.com/39702832/153999580-a6323f49-62e4-4fff-b27f-29fbc8fd80eb.png" width="24"> 사이트 주소</h2>
 <h4>[DFU 파일 관리 사이트](http://13.124.142.118)</h4>
 <p>※ Admin 암호 입력해야 이용 가능</p>
 <hr>
 
-<h2>★ 구현 과정</h2>
+<h2><img src="https://user-images.githubusercontent.com/39702832/153999580-a6323f49-62e4-4fff-b27f-29fbc8fd80eb.png" width="24"> 구현 과정</h2>
 <h3>1일차</h3>
 <p>● DFU 파일 관리 사이트(안) 내용 숙지 및 앞으로의 작업 계획 구상</p>
 <p>● Django로 작업 결정 및 공부(구글링, 유튜브, 등 ...)</p>

@@ -44,4 +44,13 @@ class miribogi(models.Model):
     imageFile3 = models.FileField(upload_to='')
 
 class AdminPassword(models.Model):
-    password = models.CharField(max_length=10)
+    password = models.CharField(max_length=10) # 유저가 입력한 Admin 비밀번호
+
+class RealAdminPassword(models.Model):
+    realpassword = models.CharField(max_length=10) # 정답 Admin 비밀번호
+
+class CountChangeAP(models.Model):
+    cnt = models.IntegerField(default=1) # Admin 비밀번호 변경 시 count
+
+class UserPassword(models.Model):
+    password1 = models.CharField(max_length=10) # 유저가 입력한 사용자 비밀번호

@@ -52,7 +52,7 @@
       cursor: pointer;
     }
 
-    .modal-wrapper{
+    .modal-wrapper, .modal-wrapper2{
         position: fixed;
         top: -10%;
         left: 0;
@@ -77,13 +77,27 @@
         color: black;
     }
 
-    .close-wrapper{
+    .modal2{
+        font-size: 24px;
+        background: white;
+        padding: 24px 16px;
+        border: 5px solid rgb(175, 190, 220);
+        border-radius: 4px;
+        width: 350px;
+        height: 220px;
+        overflow: auto;
+
+        opacity: 0.95;
+        color: black;
+    }
+
+    .close-wrapper, .close-wrapper2{
         position: absolute;
         right: 0;
         text-align: right;
     }
 
-    #close1{
+    #close1, #close2{
       background-color: rgb(239, 239, 239);
       border: 2px solid black;
       padding: 7px;
@@ -95,7 +109,11 @@
       cursor: pointer;
     }
 
-    #sticky_div{
+    #close2:hover{
+      cursor: pointer;
+    }
+
+    #sticky_div, #sticky_div2{
       position: sticky;
       display: flex;
       bottom: 0;
@@ -136,6 +154,10 @@
       font-size: 20px;
     }
 
+    #nebonegi_button2{
+
+    }
+
     *{
       font-family: 'Gowun Dodum', sans-serif;
     }
@@ -146,6 +168,14 @@
 
     #logout:hover{
       cursor: pointer;
+    }
+
+    #change:hover{
+      cursor: pointer;
+    }
+
+    #html_form2 > input{
+      font-size: 20px;
     }
   </style>
 
@@ -165,13 +195,39 @@
       <a style="color: #00549f; text-decoration:none; font-weight: bold;" href="{% url 'logout' %}">로그아웃</a>　 |　
       <form style="display: inline;" method="post">
         {% csrf_token %}
-        <input style="color: white; font-size: 15px; background-color: #00549f; font-weight: bold; padding: 5px 10px;" id="logout" name="logout" type="submit" value="Admin 로그아웃"/>
+        <input style="color: white; font-size: 15px; background-color: #00549f; font-weight: bold; padding: 5px 10px;" id="logout" name="logout" type="submit" value="Admin 로그아웃"/>　 |　
       </form>
+      <span style="color: white; font-size: 15px; background-color: #ff6289; font-weight: bold; padding: 7px 13px;" id="change">Admin 암호변경</span>
       {% else %}
       <a style="color: #00549f; text-decoration:none; font-weight: bold;" href="{% url 'login' %}">로그인</a>　|　
       <a style="color: #00549f; text-decoration:none; font-weight: bold;" href="{% url 'register' %}">회원가입</a>
       {% endif %}
     </div>
+
+
+    <div class="modal-wrapper2" id="modal2" style="display: none;">
+    <div class="modal2">
+      <div><strong>&ltAdmin 암호변경&gt</strong></div>
+      <div>
+        <p>변경할 암호를 입력하세요</p>
+      </div>
+      <form method="post" id="html_form2" onsubmit="return false">
+        {% csrf_token %}
+        <!-- input태그의 name을 백엔드에서 받아와서 값을 읽는 구조-->
+        <input type="password" name="nebonegi_button2" id="nebonegi_button2"/>
+        <input id="change_submit" name="change_submit" type="submit" value="입력">
+      </form>
+
+      <div id="sticky_div2">
+        <div class="close-wrapper">
+          <button id="close2">닫기</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
     <hr>
     <br>
     <!-- 로그인 했을 경우에 이하 코드 전체를 프론트단에서 보이게 하기 -->
@@ -291,7 +347,7 @@
       pw = prompt("내보내려면 암호를 입력하세요.");
 
       // 암호 입력 시 html_form의 속성 중 하나인 onsubmit을 true로 바꿈(원래는 false였음)
-      if(pw=={{EXPORT_P}}){
+      if(pw=='{{up}}'){
           html_form.setAttribute('onsubmit','return true');
           confirm("내보내기 성공!")
       }else{
@@ -329,7 +385,7 @@
     const edit_link = document.querySelectorAll('.ee');
     edit_link.forEach(el => el.addEventListener('click', event => {
         pw1 = prompt("수정하려면 암호를 입력하세요.");
-        if(pw1=={{EDIT_P}}){
+        if(pw1=='{{up}}'){
             confirm("인증 성공!")
         }else{
             alert("암호가 일치하지 않습니다.")
@@ -340,7 +396,7 @@
     const delete_link1 = document.querySelectorAll('.dd1');
     delete_link1.forEach(el => el.addEventListener('click', event => {
         pw2 = prompt("삭제하려면 암호를 입력하세요.");
-        if(pw2=={{DELETE_P}}){
+        if(pw2=='{{up}}'){
             confirm("인증 성공!")
         }else{
             alert("암호가 일치하지 않습니다.")
@@ -351,7 +407,7 @@
     const delete_link2 = document.querySelectorAll('.dd2');
     delete_link2.forEach(el => el.addEventListener('click', event => {
         pw2 = prompt("삭제하려면 암호를 입력하세요.");
-        if(pw2=={{DELETE_P}}){
+        if(pw2=='{{up}}'){
             confirm("인증 성공!")
         }else{
             alert("암호가 일치하지 않습니다.")
@@ -373,5 +429,34 @@
         confirm("Admin 로그아웃 성공!")
     }
 
+    /*
+    ------------------------------------------------------------------------------------------------------------------
+    */
+    nButton2 = document.getElementById("change_submit");
+    html_form2 = document.getElementById("html_form2");
+    nButton2.onclick = () => {
+      pw2 = prompt("Admin 암호변경을 하려면 (사용자)암호를 입력하세요.");
+
+      // 암호 입력 시 html_form의 속성 중 하나인 onsubmit을 true로 바꿈(원래는 false였음)
+      if(pw2=='{{up}}'){
+          html_form2.setAttribute('onsubmit','return true');
+          confirm("Admin 암호변경 성공!")
+      }else{
+          alert("암호가 일치하지 않습니다.")
+      }
+    }
+
+
+
+     const open2 = document.getElementById("change");
+     const modal2 = document.querySelector("#modal2");
+     open2.onclick = () => {
+         modal2.style.display = "flex";
+     }
+
+     const close2 = document.getElementById("close2");
+     close2.onclick = () => {
+         modal2.style.display = "none";
+     }
 </script>
 </html>

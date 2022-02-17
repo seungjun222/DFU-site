@@ -1,5 +1,6 @@
+import django.forms.fields
 from django.shortcuts import render
-from crud.models import crudstudent, zebal, miribogi, AdminPassword
+from crud.models import crudstudent, zebal, miribogi, AdminPassword, UserPassword, CountChangeAP, RealAdminPassword
 from django.contrib import messages
 from crud.forms import stform
 
@@ -113,21 +114,44 @@ def stdisplay(request):
     # EDIT_P = os.environ.get('EDIT_PASSWORD', '1234')
     # DELETE_P = os.environ.get('DELETE_PASSWORD', '1234')
     # EXPORT_P = os.environ.get('EXPORT_PASSWORD', '1234')
-    EDIT_P = '1234'
-    DELETE_P = '1234'
-    EXPORT_P = '1234'
 
     """
-        추후 작성
+        1. 사용자가 Admin 로그아웃을 할 때마다 count하는 클래스모델에서 1씩 추가하여 로그인/로그아웃 여부 판별
+        2. 사용자가 Admin 암호변경을 할 때마다 그 변경한 암호를, 정답 Admin 암호 클래스모델의 value값에 저장
     """
-    ap = AdminPassword()
+    cc_ap = CountChangeAP()
+    r_ap = RealAdminPassword()
 
     if request.method == "POST":
         if request.POST.get("logout"):
-            ap.password = "4444"
-            ap.save()
+            cc_ap.cnt += 1
+            cc_ap.save()
 
-    return render(request,"index.html",{"crudstudent":result, "zebal":result2, "z":zz, "m_result2":m_result2, "delete_flag":delete_flag, "EDIT_P":EDIT_P, "DELETE_P":DELETE_P, "EXPORT_P":EXPORT_P})
+        if request.POST.get("change_submit"):
+            change_p = request.POST.get("nebonegi_button2")
+            print("change_p:{}".format(change_p))
+            r_ap.realpassword = change_p
+            r_ap.save()
+
+    """
+        1. 유저가 입력한 사용자 암호를 index.html에서 버튼암호 입력하는 데에 재사용하기 위해 아래와 같은 코드 작성
+    """
+
+    upShow = UserPassword.objects.values()
+    upShow = list(upShow)  # QuerySet인 upShow를 리스트의 형태로 변환
+
+    up_lst = []  # 곧 만들 리스트에 해당
+    for i in upShow:  # models.py에 있는 UserPassword db의 object들의 value 값들을 하나씩 돌며 반복
+        for j in i.values():  # value 값들의 value 값들을 하나씩 돌며 반복하여 리스트에 저장
+            up_lst.append(j)
+    print(up_lst) # [1, 'qewr1324']
+
+    if len(up_lst) >= 1:
+        up = up_lst[-1] # 리스트에 계속 append 되는구조라서 인덱스를 '-1'로 설정했음. 그런데 append하기전에 delete해서 충분히 로직 잘 짤 수 있을 듯. 그런데 일단 계속 append하는 구조로만 진행.
+    else:
+        up = 0 # 값 초기화
+
+    return render(request,"index.html",{"crudstudent":result, "zebal":result2, "z":zz, "m_result2":m_result2, "delete_flag":delete_flag, "up":up})
 
 def stinsert(request):
     if request.method=="POST":
@@ -193,15 +217,36 @@ def register(request):
     form = UserCreationForm
     user_flag = 0 # 회원가입 폼 제출 못할 경우, 추후 HTML(register.html) 상에서 Admin 암호 prompt 창을 계속 띄우기 위해 user_flag 설정
 
+    cc_ap = CountChangeAP()
+    if cc_ap.cnt % 2 == 1:
+        print("Admin 로그아웃")
+        IsAdminOut = 1
+    elif cc_ap.cnt % 2 == 0:
+        print("Admin 로그인")
+        IsAdminOut = 0
+
     if request.method == 'POST':
         regForm=UserCreationForm(request.POST)
         if regForm.is_valid():
             regForm.save()
+            """
+                regForm.cleaned_data 하면 결과가 아래와 같이 나옴 (실제 입력한 ID와 PW)
+                {'username': 'seungjun444', 'password1': 'qewr1324', 'password2': 'qewr1324'}
+            """
+            password1 = regForm.cleaned_data['password1']
+
+            up = UserPassword()
+            """
+                 ★★★ 사용자가 장고에서 제공하는 회원가입 양식에서 입력한 암호를 models.py의 UserPassword 클래스모델에 저장
+            """
+            up.password1 = password1
+            up.save()
+
             messages.success(request, '회원가입이 정상적으로 완료되었습니다!.')
             user_flag = 1 # 회원가입 폼 제출 성공하여, user_flag가 1이 됨에따라, 추후 HTML(register.html)에서 암호 prompt 자동생성 방지
 
         """
-            1. models.py에서 AdminPassword라는 새로운 클래스모델 생성
+            1. models.py에서 AdminPassword 새로운 클래스모델 생성
             2. 오직 admin 비밀번호를 저장하기 위한 데이터베이스
             3. 사용자가 admin 비밀번호를 입력하면 받아와서 모두 저장함
         """
@@ -224,8 +269,25 @@ def register(request):
         if i == len(apShow) - 1:
             apLast = apShow[i]
 
-    core = "6666"
-    return render(request, 'register.html',{'form':form, 'user_flag':user_flag, 'apLast':apLast, 'core':core})
+    """
+        1. 정답 Admin 암호를 저장하기 위해 클래스모델 생성
+        2. 리스트로 타입변경 후 마지막 인덱스 값을 core(정답 Admin 암호)로 설정
+        3. 사용자가 Admin 암호 변경할 때마다 리스트의 길이가 1씩 늘어날 것이므로 마지막 인덱스 값을 주목한 것임
+    """
+
+    r_apShow = RealAdminPassword.objects.values()
+    r_apShow = list(r_apShow)
+    r_ap_list = []  # 곧 만들 리스트에 해당
+    for i in r_apShow:  # models.py에 있는 UserPassword db의 object들의 value 값들을 하나씩 돌며 반복
+        for j in i.values():  # value 값들의 value 값들을 하나씩 돌며 반복하여 리스트에 저장
+            r_ap_list.append(j)
+
+    if len(r_ap_list) >= 1:
+        core = str(r_ap_list[-1]) # 리스트에 계속 append 되는구조라서 인덱스를 '-1'로 설정했음. 그런데 append하기전에 delete해서 충분히 로직 잘 짤 수 있을 듯. 그런데 일단 계속 append하는 구조로만 진행.
+    else:
+        core = '0' # 값 초기화
+
+    return render(request, 'register.html',{'form':form, 'user_flag':user_flag, 'apLast':apLast, 'core':core, 'IsAdminOut':IsAdminOut})
 
 def stlogin(request):
     return render(request, './registration/login.html')

@@ -54,3 +54,6 @@ class CountChangeAP(models.Model):
 
 class UserPassword(models.Model):
     password1 = models.CharField(max_length=10) # 유저가 입력한 사용자 비밀번호
+
+class AdminMode(models.Model):
+    adminmodepassword = models.CharField(max_length=10) # 유저가 '관리자 모드'에 입력한 Admin 비밀번호

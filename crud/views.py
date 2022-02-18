@@ -1,6 +1,6 @@
 import django.forms.fields
 from django.shortcuts import render
-from crud.models import crudstudent, zebal, miribogi, AdminPassword, UserPassword, CountChangeAP, RealAdminPassword
+from crud.models import crudstudent, zebal, miribogi, AdminPassword, UserPassword, CountChangeAP, RealAdminPassword, AdminMode
 from django.contrib import messages
 from crud.forms import stform
 
@@ -8,6 +8,9 @@ import os
 
 def stdisplay(request):
     delete_flag = 0
+
+    global core  # stdisplay에서도 core를 사용하기 위함 (관리자모드 등)
+    core = '2222'  # 값 초기화
 
     result=crudstudent.objects.all()
 
@@ -106,32 +109,82 @@ def stdisplay(request):
             savest2.imageFile2 = zz.imageFile3
             savest2.save()
 
-    """
-        1. 보안을 위해 '닷엔브'와 'os.environ.get'메소드를 사용하였지만, 서버상에서 정상 작동안함
-        2. 따라서 콤마 뒤에 값을 Default 값으로 일단 설정했으나 이 역시 제 3자가 개발자도구로 볼 수 있음
-        3. 이에 대해서 추후에 해결이 필요함
-    """
+    # 1. 보안을 위해 '닷엔브'와 'os.environ.get'메소드를 사용하였지만, 서버상에서 정상 작동안함
+    # 2. 따라서 콤마 뒤에 값을 Default 값으로 일단 설정했으나 이 역시 제 3자가 개발자도구로 볼 수 있음
+    # 3. 이에 대해서 추후에 해결이 필요함
     # EDIT_P = os.environ.get('EDIT_PASSWORD', '1234')
     # DELETE_P = os.environ.get('DELETE_PASSWORD', '1234')
     # EXPORT_P = os.environ.get('EXPORT_PASSWORD', '1234')
 
-    """
-        1. 사용자가 Admin 로그아웃을 할 때마다 count하는 클래스모델에서 1씩 추가하여 로그인/로그아웃 여부 판별
-        2. 사용자가 Admin 암호변경을 할 때마다 그 변경한 암호를, 정답 Admin 암호 클래스모델의 value값에 저장
-    """
     cc_ap = CountChangeAP()
+
+    """
+        사용자가 Admin 암호변경을 할 때마다 그 변경한 암호를, 정답 Admin 암호 클래스모델의 value값에 저장
+    """
+
     r_ap = RealAdminPassword()
-
     if request.method == "POST":
-        if request.POST.get("logout"):
-            cc_ap.cnt += 1
-            cc_ap.save()
-
         if request.POST.get("change_submit"):
             change_p = request.POST.get("nebonegi_button2")
             print("change_p:{}".format(change_p))
             r_ap.realpassword = change_p
             r_ap.save()
+
+
+
+    """
+        1. 정답 Admin 암호를 저장하기 위해 클래스모델 생성
+        2. 리스트로 타입변경 후 마지막 인덱스 값을 core(정답 Admin 암호)로 설정
+        3. 사용자가 Admin 암호 변경할 때마다 리스트의 길이가 1씩 늘어날 것이므로 마지막 인덱스 값을 주목한 것임
+    """
+
+    r_apShow = RealAdminPassword.objects.values()
+    r_apShow = list(r_apShow)
+    r_ap_list = []  # 곧 만들 리스트에 해당
+    for i in r_apShow:  # models.py에 있는 UserPassword db의 object들의 value 값들을 하나씩 돌며 반복
+        for j in i.values():  # value 값들의 value 값들을 하나씩 돌며 반복하여 리스트에 저장
+            r_ap_list.append(j)
+
+    if len(r_ap_list) >= 1:
+        core = str(r_ap_list[-1]) # 리스트에 계속 append 되는구조라서 인덱스를 '-1'로 설정했음. 그런데 append하기전에 delete해서 충분히 로직 잘 짤 수 있을 듯. 그런데 일단 계속 append하는 구조로만 진행.
+    else:
+        core = '2222' # 값 초기화
+
+
+    """
+        관리자 모드 (     추후작성       )
+    """
+
+    a_m = AdminMode()
+
+    if request.method == "POST":
+        if request.POST.get("admin_mode_submit"):
+            sibal = request.POST.get("nebonegi_button3")
+            print(sibal)
+            a_m.adminmodepassword = sibal
+            a_m.save()
+            """
+                1. 관리자모드 누르고 입력한 암호가 core와 일치하면 Admin 로그인 한 것이므로, count를 해줘야 한다
+                2. 아래와 같은 if문을 작성하지 않으면 올바르게 암호를 입력하더라도, IsAdminOut이 계속 1로 유지된다.
+            """
+            print("sibal:{}ㅋ".format(sibal))
+            print("core:{}ㅋ".format(core))
+
+            if sibal == core:
+                cc_ap.cnt += 1
+                cc_ap.save()
+
+
+    """
+        Admin 로그아웃 시, index.html의 'Admin 로그아웃'과 'Admin 암호변경'을 숨기고, '관리자 모드'를 보여주기 위해 아래와 같은 코드 작성
+    """
+
+    if cc_ap.cnt % 2 == 1:
+        print("Admin 로그아웃")
+        IsAdminOut = 1
+    elif cc_ap.cnt % 2 == 0:
+        print("Admin 로그인")
+        IsAdminOut = 0
 
     """
         1. 유저가 입력한 사용자 암호를 index.html에서 버튼암호 입력하는 데에 재사용하기 위해 아래와 같은 코드 작성
@@ -151,7 +204,36 @@ def stdisplay(request):
     else:
         up = 0 # 값 초기화
 
-    return render(request,"index.html",{"crudstudent":result, "zebal":result2, "z":zz, "m_result2":m_result2, "delete_flag":delete_flag, "up":up})
+    """
+        추후작성
+    """
+
+    amShow = AdminMode.objects.values()
+    amShow = list(amShow)  # QuerySet인 upShow를 리스트의 형태로 변환
+
+    am_lst = []  # 곧 만들 리스트에 해당
+
+    for i in amShow:  # models.py에 있는 UserPassword db의 object들의 value 값들을 하나씩 돌며 반복
+        for j in i.values():  # value 값들의 value 값들을 하나씩 돌며 반복하여 리스트에 저장
+            am_lst.append(j)
+    print(am_lst) # []
+
+    global am
+    if len(am_lst) >= 1:
+        am = am_lst[-1] # 리스트에 계속 append 되는구조라서 인덱스를 '-1'로 설정했음. 그런데 append하기전에 delete해서 충분히 로직 잘 짤 수 있을 듯. 그런데 일단 계속 append하는 구조로만 진행.
+    else:
+        am = "값초기화" # 값 초기화
+
+    """
+        사용자가 Admin 로그아웃을 할 때마다 count하는 클래스모델에서 1씩 추가하여 로그인/로그아웃 여부 판별
+    """
+
+    if request.method == "POST":
+        if request.POST.get("logout"):
+            cc_ap.cnt += 1
+            cc_ap.save()
+
+    return render(request,"index.html",{"crudstudent":result, "zebal":result2, "z":zz, "m_result2":m_result2, "delete_flag":delete_flag, "up":up, "am":am, "core":core, "IsAdminOut":IsAdminOut})
 
 def stinsert(request):
     if request.method=="POST":
@@ -282,10 +364,11 @@ def register(request):
         for j in i.values():  # value 값들의 value 값들을 하나씩 돌며 반복하여 리스트에 저장
             r_ap_list.append(j)
 
+    global core
     if len(r_ap_list) >= 1:
         core = str(r_ap_list[-1]) # 리스트에 계속 append 되는구조라서 인덱스를 '-1'로 설정했음. 그런데 append하기전에 delete해서 충분히 로직 잘 짤 수 있을 듯. 그런데 일단 계속 append하는 구조로만 진행.
     else:
-        core = '0' # 값 초기화
+        core = '2222' # 값 초기화
 
     return render(request, 'register.html',{'form':form, 'user_flag':user_flag, 'apLast':apLast, 'core':core, 'IsAdminOut':IsAdminOut})
 

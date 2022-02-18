@@ -26,6 +26,11 @@
       margin-top: 20px;
     }
 
+    .yellow_btn_class{
+      border-radius: 100px;
+      padding: 10px !important;
+    }
+
     #insert_link, #miribogi_div, #final_link{
       border: 2px solid black;
       color: black;
@@ -52,7 +57,7 @@
       cursor: pointer;
     }
 
-    .modal-wrapper, .modal-wrapper2{
+    .modal-wrapper, .modal-wrapper2, .modal-wrapper3{
         position: fixed;
         top: -10%;
         left: 0;
@@ -66,18 +71,19 @@
 
     .modal{
         background: white;
-        padding: 24px 16px;
+        padding: 30px;
         border: 5px solid rgb(175, 190, 220);
         border-radius: 4px;
-        width: 1250px;
+        width: 1200px;
         height: 350px;
         overflow: auto;
 
         opacity: 0.95;
         color: black;
+
     }
 
-    .modal2{
+    .modal2, .modal3{
         font-size: 24px;
         background: white;
         padding: 24px 16px;
@@ -91,13 +97,13 @@
         color: black;
     }
 
-    .close-wrapper, .close-wrapper2{
+    .close-wrapper, .close-wrapper2, .close-wrapper2{
         position: absolute;
         right: 0;
         text-align: right;
     }
 
-    #close1, #close2{
+    #close1, #close2, #close3{
       background-color: rgb(239, 239, 239);
       border: 2px solid black;
       padding: 7px;
@@ -109,11 +115,11 @@
       cursor: pointer;
     }
 
-    #close2:hover{
+    #close2:hover, #close3:hover{
       cursor: pointer;
     }
 
-    #sticky_div, #sticky_div2{
+    #sticky_div, #sticky_div2, #sticky_div3{
       position: sticky;
       display: flex;
       bottom: 0;
@@ -170,11 +176,11 @@
       cursor: pointer;
     }
 
-    #change:hover{
+    #change:hover, #admin_mode:hover{
       cursor: pointer;
     }
 
-    #html_form2 > input{
+    #html_form2 > input, #html_form3 > input{
       font-size: 20px;
     }
   </style>
@@ -191,48 +197,71 @@
     <div id="login_register">
       <!-- 로그인 했을 경우 "로그아웃" 띄우고, 로그아웃 했을 경우 "로그인"과 "회원가입" 띄우기 -->
       {% if user.is_authenticated %}
+      <!-- 체크용 <strong>(am : {{am}} | core : {{core}} | IsAdminOut : {{IsAdminOut}})</strong> -->
       <span>현재 접속 ID : <strong>{{user}}</strong> 님</span>　 |　
       <a style="color: #00549f; text-decoration:none; font-weight: bold;" href="{% url 'logout' %}">로그아웃</a>　 |　
-      <form style="display: inline;" method="post">
-        {% csrf_token %}
-        <input style="color: white; font-size: 15px; background-color: #00549f; font-weight: bold; padding: 5px 10px;" id="logout" name="logout" type="submit" value="Admin 로그아웃"/>　 |　
-      </form>
-      <span style="color: white; font-size: 15px; background-color: #ff6289; font-weight: bold; padding: 7px 13px;" id="change">Admin 암호변경</span>
+          {% if am == core and IsAdminOut == 0 %}
+            <form style="display: inline;" method="post">
+            {% csrf_token %}
+            <input style="color: white; font-size: 15px; background-color: #00549f; font-weight: bold; padding: 5px 10px;" id="logout" name="logout" type="submit" value="Admin 로그아웃"/>　 |　
+            </form>
+            <span style="color: white; font-size: 15px; background-color: #ff6289; font-weight: bold; padding: 7px 13px;" id="change">Admin 암호변경</span>
+          {% endif %}
+          {% if am != core or IsAdminOut == 1 %}
+            <span style="color: white; font-size: 15px; background-color: black; font-weight: bold; padding: 7px 13px;" id="admin_mode" onclick="whynot()">관리자 모드</span>
+          {% endif %}
       {% else %}
       <a style="color: #00549f; text-decoration:none; font-weight: bold;" href="{% url 'login' %}">로그인</a>　|　
       <a style="color: #00549f; text-decoration:none; font-weight: bold;" href="{% url 'register' %}">회원가입</a>
       {% endif %}
     </div>
 
-
-    <div class="modal-wrapper2" id="modal2" style="display: none;">
-    <div class="modal2">
-      <div><strong>&ltAdmin 암호변경&gt</strong></div>
-      <div>
-        <p>변경할 암호를 입력하세요</p>
-      </div>
-      <form method="post" id="html_form2" onsubmit="return false">
-        {% csrf_token %}
-        <!-- input태그의 name을 백엔드에서 받아와서 값을 읽는 구조-->
-        <input type="password" name="nebonegi_button2" id="nebonegi_button2"/>
-        <input id="change_submit" name="change_submit" type="submit" value="입력">
-      </form>
-
-      <div id="sticky_div2">
-        <div class="close-wrapper">
-          <button id="close2">닫기</button>
+    <div class="modal-wrapper3" id="modal3" style="display: none;">
+      <div class="modal3">
+        <div><strong>&lt관리자 모드&gt</strong></div>
+        <div>
+          <p>Admin 암호를 입력하세요</p>
+        </div>
+        <form method="post" id="html_form3">
+          {% csrf_token %}
+          <!-- input태그의 name을 백엔드에서 받아와서 값을 읽는 구조-->
+          <input type="password" name="nebonegi_button3" id="nebonegi_button3"/>
+          <input id="admin_mode_submit" name="admin_mode_submit" type="submit" value="입력">
+        </form>
+        <div id="sticky_div3">
+          <div class="close-wrapper">
+            <button id="close3">닫기</button>
+          </div>
         </div>
       </div>
-
     </div>
-  </div>
+
+
+    <div class="modal-wrapper2" id="modal2" style="display: none;">
+      <div class="modal2">
+        <div><strong>&ltAdmin 암호변경&gt</strong></div>
+        <div>
+          <p>변경할 암호를 입력하세요</p>
+        </div>
+        <form method="post" id="html_form2">
+          {% csrf_token %}
+          <!-- input태그의 name을 백엔드에서 받아와서 값을 읽는 구조-->
+          <input type="password" name="nebonegi_button2" id="nebonegi_button2"/>
+          <input id="change_submit" name="change_submit" type="submit" value="입력">
+        </form>
+        <div id="sticky_div2">
+          <div class="close-wrapper">
+            <button id="close2">닫기</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
     <hr>
-    <br>
     <!-- 로그인 했을 경우에 이하 코드 전체를 프론트단에서 보이게 하기 -->
     {% if user.is_authenticated %}
-    <br>
+    <p style="font-weight: bold; font-size:20px;">&lt제품 리스트&gt</p>
     <form method="post">
         {% csrf_token %}
     <table border="1">
@@ -276,10 +305,10 @@
     </table>
 
     <div id="nebo_miri_buttons">
-        <a id="insert_link" href="{% url 'stinsert'%}"> 추가하기</a>
-        <input id="wait_input" type="submit" value="대기하기"/>
-        <div id="miribogi_div">미리보기</div>
-        <a id="final_link" href="{% url 'stfinal'%}">최종화면</a>
+        <a class="yellow_btn_class" id="insert_link" href="{% url 'stinsert'%}"> 제품 리스트 추가</a>
+        <input class="yellow_btn_class" id="wait_input" type="submit" value="미리보기에 등록"/>
+        <div class="yellow_btn_class" id="miribogi_div">미리보기</div>
+        <a class="yellow_btn_class" id="final_link" href="{% url 'stfinal'%}">최종화면</a>
     </div>
 
     </form>
@@ -289,42 +318,42 @@
   <div id="readme">
     <hr>
     <h2><img src="/static/img/star.png" class="star" alt="별"> 기능 소개</h2>
-    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>추가하기 -</strong> <strong>메인 페이지의 DB</strong> 테이블에 제품을 새로 등록</p>
-    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>대기하기 -</strong> 선택한 데이터를 <strong>미리보기 DB</strong>에 제출</p>
-    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>미리보기 -</strong> 최종화면의 데이터와 가장 마지막으로 대기하기한 1개의 데이터를 모두 미리 보여줌</p>
-    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>내보내기 -</strong> 미리보기 안에 있는 내보내기 버튼으로서, 마지막으로 대기하기한 데이터를 <strong>최종화면 DB</strong>에 등록</p>
+    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>제품 리스트 추가 -</strong> <strong>메인 페이지의 DB</strong> 테이블에 제품을 새로 등록</p>
+    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>미리보기에 등록 -</strong> 선택한 데이터를 <strong>미리보기 DB</strong>에 제출</p>
+    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>미리보기 -</strong> 최종화면의 데이터와 가장 마지막으로 "미리보기에 등록"한 1개의 데이터를 모두 미리 보여줌</p>
+    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>최종화면에 등록 -</strong> 미리보기 안에 있는 버튼으로서, 마지막으로 "미리보기에 등록"한 데이터("대기"에 해당)를 <strong>최종화면 DB</strong>에 등록</p>
     <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>최종화면 -</strong> 최종적으로 내보낸 데이터들을 텍스트 형식으로 새 창에 보여줌</p>
     <hr>
     <h2><img src="/static/img/star.png" class="star" alt="별"> 이용 순서</h2>
-    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong style="color:#ff6289;">추가하기</strong>(생략가능)<strong> → <span style="color: #ff6289;">대기하기</span></strong>(데이터 선택 후)<strong> → <span style="color: #ff6289;">미리보기</span> → <span style="color: #ff6289;">내보내기</span> → <span style="color: #ff6289;">최종화면</span></strong></p>
+    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong><span style="color:#ff6289;">제품 리스트 추가</span> → <span style="color:#ff6289;">체크박스 클릭</span> → <span style="color: #ff6289;">미리보기에 등록</span> → <span style="color: #ff6289;">미리보기</span> → <span style="color: #ff6289;">최종화면에 등록</span> → <span style="color: #ff6289;">최종화면</span></strong></p>
     <hr>
     <h2><img src="/static/img/star.png" class="star" alt="별"> 유의 사항</h2>
-    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>"대기하기"</strong>와 <strong>"내보내기"</strong>는 <strong>1개씩만</strong> 가능</p>
-    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>아무것도 선택하지 않고 "대기하기"</strong>를 누를 경우 완료 문구는 뜨지만, 실제로 대기하기 되지는  않음</p>
-    <p><img src="/static/img/pin.png" class="pin" alt="핀"> 미리보기 안에 <strong>"대기"</strong>에 해당하는 데이터는 <strong>가장 최근에 "대기하기"한 항목임</strong></p>
-    <p><img src="/static/img/pin.png" class="pin" alt="핀"> ┗> 대기를 내보내기 하더라도 <strong>"대기"</strong>는 바뀌지 않음<strong>(새로 다른 것을 "대기하기"해야 바뀜)</strong></p>
-    <p><img src="/static/img/pin.png" class="pin" alt="핀"> 사이트 이용 종료 시 보안을 위해 <strong>"Admin 로그아웃"</strong> 먼저 클릭 후, 그 옆에 있는 <strong>"로그아웃"</strong> 클릭하기</p>
+    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>"미리보기에 등록"</strong>과 <strong>"최종화면에 등록"</strong>는 <strong>1개씩만</strong> 가능</p>
+    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>아무것도 선택하지 않고 "미리보기에 등록"</strong>를 누를 경우 완료 문구는 뜨지만, 실제로 미리보기에 등록 되지는  않음</p>
+    <p><img src="/static/img/pin.png" class="pin" alt="핀"> 미리보기 안에 <strong>"대기"</strong>에 해당하는 데이터는 <strong>가장 최근에 "미리보기에 등록"한 항목임</strong></p>
+    <p><img src="/static/img/pin.png" class="pin" alt="핀"> ┗> 대기를 "최종화면에 등록" 하더라도 <strong>"대기"</strong>는 바뀌지 않음<strong> ( 새로 다른 것을 "미리보기에 등록"해야 바뀜 )</strong></p>
+    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>최종화면</strong>의 데이터를 <strong>삭제</strong>하고 싶으면 <strong>미리보기</strong>에서 <strong>삭제</strong>하면 됨 ( 미리보기에서도 삭제됨 )</p>
+    <p><img src="/static/img/pin.png" class="pin" alt="핀"> 사이트 이용 종료 시 보안을 위해 <strong>"로그아웃"</strong> 클릭하기 ( 관리자 모드였더라도, "Admin 로그아웃"은 저절로 실행됨 )</p>
   </div>
   <br>
 
   <!-- 특정 버튼 선택할 시에만 나타나는 모달창 구성 -->
   <div class="modal-wrapper" id="modal" style="display: none;">
     <div class="modal">
-      <div><strong>&lt최종화면 미리보기&gt</strong><strong style="color: #00549f; margin-left: 10px;">(대기에 해당하는 데이터는 가장 최근에 "대기하기"한 항목)</strong></div>
+      <div><strong>&lt최종화면 미리보기&gt</strong><strong style="color: #00549f; margin-left: 10px;">(대기에 해당하는 데이터는 가장 최근에 "미리보기에 등록"한 항목)</strong></div>
       <div>
         <!-- zebal 모델에 저장된 데이터들을 반복문을 통해 모두 불러오기. zebal은 최종화면 DB라고 생각하면 됨. -->
         {% for i in zebal%}
         <p><a style="color:#ff6289; text-decoration: none; font-weight: bold;" class="dd2" href="/Delete2/{{i.id}}">삭제</a> - {{i.name_ko2}},{{i.time2|date:'Y-m-d-H:i'}},{{i.name_en2}},{{i.service2}},{{i.product2}},{{i.device2}},{{i.uploadedFile2}},{{i.crc2}},<a style="color:blue;" href="{{i.uploadedFile2.url}}" download="">{{i.uploadedFile2}}</a>,{{i.imageFile2}},<a style="color:blue;" href="{{i.imageFile2.url}}" download="">{{i.imageFile2}}</a></p>
         {% endfor %}
       </div>
-      <hr>
       <!-- views.py에서 넘겨준 z값을 불러옴. z는 zebal 모델에 저장된 가장 마지막 인텍스의 데이터임. -->
       <div><strong style="color: #00549f;">대기</strong> - {{z.name_ko3}},{{z.time3|date:'Y-m-d-H:i'}},{{z.name_en3}},{{z.service3}},{{z.product3}},{{z.device3}},{{z.uploadedFile3}},{{z.crc3}},<a style="color:blue;" href="{{z.uploadedFile3.url}}" download="">{{z.uploadedFile3}}</a>,{{z.imageFile3}},<a style="color:blue;" href="{{z.imageFile3.url}}" download="">{{z.imageFile3}}</a></div>
 
       <div id="sticky_div">
          <form method="post" id="html_form" onsubmit="return false">
           {% csrf_token %}
-          <div id="nebonegi_wrapper"><input type="submit" value="내보내기" name="nebonegi_button" id="nebonegi_button"/></div>
+          <div id="nebonegi_wrapper"><input type="submit" value="최종화면에 등록" class="yellow_btn_class" name="nebonegi_button" id="nebonegi_button"/></div>
         </form>
         <div class="close-wrapper">
           <button id="close1">닫기</button>
@@ -337,19 +366,22 @@
   {% else %}
   <p style="font-size: 18px;">로그인이 필요한 서비스입니다.</p>
   {% endif %}
-
+  <br>
+  <center>
+    <strong>MADE BY SEUNGJUN</strong>
+  </center>
 </body>
 
 <script>
     nButton = document.getElementById("nebonegi_button");
     html_form = document.getElementById("html_form");
     nButton.onclick = () => {
-      pw = prompt("내보내려면 암호를 입력하세요.");
+      pw = prompt("최종화면에 등록하려면 암호를 입력하세요.");
 
       // 암호 입력 시 html_form의 속성 중 하나인 onsubmit을 true로 바꿈(원래는 false였음)
       if(pw=='{{up}}'){
           html_form.setAttribute('onsubmit','return true');
-          confirm("내보내기 성공!")
+          confirm("최종화면에 등록 성공!")
       }else{
           alert("암호가 일치하지 않습니다.")
       }
@@ -372,7 +404,7 @@
 
     const wait_input = document.getElementById("wait_input");
     wait_input.onclick = () => {
-        confirm("대기하기 완료!")
+        confirm("미리보기에 등록 완료!")
     }
 
 
@@ -432,21 +464,6 @@
     /*
     ------------------------------------------------------------------------------------------------------------------
     */
-    nButton2 = document.getElementById("change_submit");
-    html_form2 = document.getElementById("html_form2");
-    nButton2.onclick = () => {
-      pw2 = prompt("Admin 암호변경을 하려면 (사용자)암호를 입력하세요.");
-
-      // 암호 입력 시 html_form의 속성 중 하나인 onsubmit을 true로 바꿈(원래는 false였음)
-      if(pw2=='{{up}}'){
-          html_form2.setAttribute('onsubmit','return true');
-          confirm("Admin 암호변경 성공!")
-      }else{
-          alert("암호가 일치하지 않습니다.")
-      }
-    }
-
-
 
      const open2 = document.getElementById("change");
      const modal2 = document.querySelector("#modal2");
@@ -458,5 +475,38 @@
      close2.onclick = () => {
          modal2.style.display = "none";
      }
+
+     /*
+    ------------------------------------------------------------------------------------------------------------------
+    */
+
+    /*
+    nButton3 = document.getElementById("admin_mode_submit");
+    html_form3 = document.getElementById("html_form3");
+    nButton3.onclick = () => {
+      pw3 = prompt("Admin 암호변경을 하려면 (사용자)암호를 입력하세요.");
+
+      // 암호 입력 시 html_form의 속성 중 하나인 onsubmit을 true로 바꿈(원래는 false였음)
+      if(pw3=='{{up}}'){
+          html_form3.setAttribute('onsubmit','return true');
+          confirm("Admin 암호변경 성공!")
+      }else{
+          alert("암호가 일치하지 않습니다.")
+      }
+    }
+    */
+
+    function whynot(){
+         const modal3 = document.querySelector("#modal3");
+         modal3.style.display = "flex";
+
+         const close3 = document.getElementById("close3");
+         close3.onclick = () => {
+         modal3.style.display = "none";
+     }
+    }
+
+
+
 </script>
 </html>

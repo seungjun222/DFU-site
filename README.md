@@ -1,5 +1,5 @@
 <h1><img src="https://user-images.githubusercontent.com/39702832/153997428-840673a8-73a9-4206-a4bd-4fe6e7fd2c96.png" width="30"> 데이터 CRUD 사이트</h1>
-<hr>
+<br>
 <h2><img src="https://user-images.githubusercontent.com/39702832/153999580-a6323f49-62e4-4fff-b27f-29fbc8fd80eb.png" width="24"> 사용 언어, 프레임워크, 데이터베이스, 클라우드 플랫폼</h2>
 <h4>● Frontend - HTML, CSS, Javascript</h4>
 <h4>● Backend - Django(Python), SQLite3, AWS(Lightsail) </h4>
@@ -115,7 +115,7 @@
 
 <h3>16일차</h3>
 <p>● 주석 추가, README 작성</p>
-<p>● 마무리!!😄 인줄 알았으나, 추가 작업 둘어옴 (Admin 로그아웃과 암호변경은 Admin만 할 수 있어야 함)</p>
+<p>● 마무리!!😄 인줄 알았으나, 추가 작업 들어옴 (Admin 로그아웃과 암호변경은 Admin만 할 수 있어야 함)</p>
 <hr>
 
 <h3>17일차</h3>
@@ -133,7 +133,7 @@
 <p>● 유저가 입력한 Admin 암호가 core(정답 Admin 암호)와 일치하면 Admin 로그인으로 판단, count +1 해줌</p>
 <p>● Admin 로그아웃 할 때마다 역시 count +1 해줌</p>
 <p>● 유저가 입력한 Admin 암호가 정답 Admin 암호와 일치하고, 카운트가 짝수이면(Admin로그인), HTML(index.html)에서 관리자모드 접속 가능하게 해줌</p>
-<p>● 반대로 유저가 입력한 Admin 암호가 정답과 일치하지 않거나, 카운트가 홀수이면(Admin로그아웃), 관리자모드 접속 불가</p>
+<p>● 유저가 입력한 Admin 암호가 정답과 일치하지 않거나, 카운트가 홀수이면(Admin로그아웃), 관리자모드 접속 불가</p>
 <p>● 헷갈리는 용어들 변경(버튼 이름 등)</p>
 <P>● README 수정 및 주석 추가</P>
 <hr>

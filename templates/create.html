@@ -7,10 +7,6 @@
       background-color: rgb(215, 230, 240);
     }
 
-    table{
-      background-color: white;
-    }
-
     img{
       position: absolute;
       top: 0;
@@ -22,6 +18,7 @@
     }
 
     table{
+      background-color: white;
       font-size: 18px;
       margin-bottom: 20px;
     }
@@ -207,30 +204,30 @@
     <table border="1">
       <tr>
         <td>제품 구분</td>
-        <td><input type="text" placeholder="name_ko" name="name_ko" value=""></td>
+        <td><input type="text" name="name_ko" value=""></td>
       </tr>
       <tr>
         <td>Device Name</td>
-        <td><input type="text" placeholder="name_en" name="name_en" value=""></td>
+        <td><input type="text" name="name_en" value=""></td>
       </tr>
       <tr>
         <td>Service UUID</td>
-        <td><input type="text" placeholder="service" name="service" value=""></td>
+        <td><input type="text" name="service" value=""></td>
       </tr>
       <tr>
         <td>Product ID</td>
-        <td><input type="text" placeholder="product" name="product" value=""></td>
+        <td><input type="text" name="product" value=""></td>
       </tr>
       <tr>
         <td>Device ID</td>
-        <td><input type="text" placeholder="device" name="device" value=""></td>
+        <td><input type="text" name="device" value=""></td>
       </tr>
       <tr>
         <td>DFU File Name</td>
         <td>
           <div class="input">
             <div id="droppable-zone">
-              <input class="droppable-file" id="input" type="file" placeholder="Input2" name="uploadedFile">
+              <input class="droppable-file" id="input" type="file" name="uploadedFile">
             </div>
           </div>
         </td>
@@ -246,13 +243,13 @@
           </div>
 
           <div class="output">
-            <input id="output" type="text" placeholder="crc" name="crc" value="">
+            <input id="output" type="text" placeholder="파일 등록 시 자동 입력됨" name="crc" value="">
           </div>
         </td>
       </tr>
       <tr>
         <td>Image Name</td>
-        <td><input type="file" placeholder="device" name="imageFile" value=""></td>
+        <td><input type="file" name="imageFile" value=""></td>
       </tr>
     </table>
 
@@ -262,7 +259,7 @@
     <!-- "추가하기"를 누를 경우, 성공적으로 추가하였다는 메시지 출력. 메시지 내용(result)은 views.py에서 설정할 수 있음.-->
     {% if messages %}
       {%for result in messages %}
-      <b style="color:red">{{result}}</b>
+      <b style="color:red; font-size: 18px;">{{result}}</b>
       {% endfor %}
     {% endif %}
     </form>

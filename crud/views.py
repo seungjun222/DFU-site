@@ -10,7 +10,7 @@ def stdisplay(request):
     delete_flag = 0
 
     global core  # stdisplay에서도 core를 사용하기 위함 (관리자모드 등)
-    core = '2222'  # 값 초기화
+    core = 'init'  # 값 초기화
 
     result=crudstudent.objects.all()
 
@@ -35,9 +35,12 @@ def stdisplay(request):
         5. 또 다른 반복문을 통해 해당 id가 있는 데이터의 10가지 value 값들을 m_nebonegi 빈 리스트에 저장
         6. 이렇게 저장한 m_nebonegi 리스트를, 미리보기 클래스모델인 m_savest2의 10가지 value에 각각 저장
     """
+
     m_nebonegi = []
+
     if request.method == "POST":
         if request.POST.get("check"):
+
             m_umhaha = int(request.POST.get("check"))
 
             for i in range(0, len(m_lst2)):
@@ -148,7 +151,7 @@ def stdisplay(request):
     if len(r_ap_list) >= 1:
         core = str(r_ap_list[-1]) # 리스트에 계속 append 되는구조라서 인덱스를 '-1'로 설정했음. 그런데 append하기전에 delete해서 충분히 로직 잘 짤 수 있을 듯. 그런데 일단 계속 append하는 구조로만 진행.
     else:
-        core = '2222' # 값 초기화
+        core = 'init' # 값 초기화
 
 
     """
@@ -222,7 +225,7 @@ def stdisplay(request):
     if len(am_lst) >= 1:
         am = am_lst[-1] # 리스트에 계속 append 되는구조라서 인덱스를 '-1'로 설정했음. 그런데 append하기전에 delete해서 충분히 로직 잘 짤 수 있을 듯. 그런데 일단 계속 append하는 구조로만 진행.
     else:
-        am = "값초기화" # 값 초기화
+        am = "init" # 값 초기화
 
     """
         사용자가 Admin 로그아웃을 할 때마다 count하는 클래스모델에서 1씩 추가하여 로그인/로그아웃 여부 판별
@@ -368,7 +371,7 @@ def register(request):
     if len(r_ap_list) >= 1:
         core = str(r_ap_list[-1]) # 리스트에 계속 append 되는구조라서 인덱스를 '-1'로 설정했음. 그런데 append하기전에 delete해서 충분히 로직 잘 짤 수 있을 듯. 그런데 일단 계속 append하는 구조로만 진행.
     else:
-        core = '2222' # 값 초기화
+        core = 'init' # 값 초기화
 
     return render(request, 'register.html',{'form':form, 'user_flag':user_flag, 'apLast':apLast, 'core':core, 'IsAdminOut':IsAdminOut})
 

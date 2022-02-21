@@ -1,17 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>Final</title>
-
-    <!--    GOOGLE FONTS LINK   -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 </head>
 <body>
     {% for i in zebal%}
-    <p>$,{{i.name_ko2}},{{i.time2|date:'Y-m-d-H:i'}},{{i.name_en2}},{{i.service2}},{{i.product2}},{{i.device2}},{{i.uploadedFile2}},{{i.crc2}},<a style="color:blue;" href="{{i.uploadedFile2.url}}" download="">{{i.uploadedFile2}}</a>,{{i.imageFile2}},<a style="color:blue;" href="{{i.imageFile2.url}}" download="">{{i.imageFile2}}</a></p>
+    $,{{i.name_ko2}},{{i.time2|date:'Y-m-d-H:i'}},{{i.name_en2}},{{i.service2}},{{i.product2}},{{i.device2}},{{i.uploadedFile2}},{{i.crc2}},http://13.124.142.118/media/{{i.uploadedFile2}},{{i.imageFile2}},http://13.124.142.118/media/{{i.imageFile2}}
     {% endfor %}
 </body>
 </html>

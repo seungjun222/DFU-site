@@ -8,6 +8,10 @@
     }
     table{
       background-color: white;
+
+    }
+    td{
+      padding: 5px;
     }
 
     #miribogi_div{
@@ -75,7 +79,7 @@
         border: 5px solid rgb(175, 190, 220);
         border-radius: 4px;
         width: 1200px;
-        height: 350px;
+        height: 600px;
         overflow: auto;
 
         opacity: 0.95;
@@ -168,8 +172,26 @@
       font-family: 'Gowun Dodum', sans-serif;
     }
 
+    #readme-wrapper{
+      border: 3px solid black;
+
+      width: 100%;
+    }
+
+    #readme{
+
+    }
+
     #readme p{
       font-size : 19px;
+    }
+
+    #readme h2{
+      margin-top: 40px;
+    }
+
+    .pin_wrapper{
+
     }
 
     #logout:hover{
@@ -313,43 +335,54 @@
 
     </form>
 
-  </center>
-  <br>
-  <div id="readme">
+
+    <br>
     <hr>
-    <h2><img src="/static/img/star.png" class="star" alt="별"> 기능 소개</h2>
-    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>제품 리스트 추가 -</strong> <strong>메인 페이지의 DB</strong> 테이블에 제품을 새로 등록</p>
-    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>미리보기에 등록 -</strong> 선택한 데이터를 <strong>미리보기 DB</strong>에 제출</p>
-    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>미리보기 -</strong> 최종화면의 데이터와 가장 마지막으로 "미리보기에 등록"한 1개의 데이터를 모두 미리 보여줌</p>
-    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>최종화면에 등록 -</strong> 미리보기 안에 있는 버튼으로서, 마지막으로 "미리보기에 등록"한 데이터("대기"에 해당)를 <strong>최종화면 DB</strong>에 등록</p>
-    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>최종화면 -</strong> 최종적으로 내보낸 데이터들을 텍스트 형식으로 새 창에 보여줌</p>
-    <hr>
-    <h2><img src="/static/img/star.png" class="star" alt="별"> 이용 순서</h2>
-    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong><span style="color:#ff6289;">제품 리스트 추가</span> → <span style="color:#ff6289;">체크박스 클릭</span> → <span style="color: #ff6289;">미리보기에 등록</span> → <span style="color: #ff6289;">미리보기</span> → <span style="color: #ff6289;">최종화면에 등록</span> → <span style="color: #ff6289;">최종화면</span></strong></p>
-    <hr>
-    <h2><img src="/static/img/star.png" class="star" alt="별"> 유의 사항</h2>
-    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>"미리보기에 등록"</strong>과 <strong>"최종화면에 등록"</strong>는 <strong>1개씩만</strong> 가능</p>
-    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>아무것도 선택하지 않고 "미리보기에 등록"</strong>를 누를 경우 완료 문구는 뜨지만, 실제로 미리보기에 등록 되지는  않음</p>
-    <p><img src="/static/img/pin.png" class="pin" alt="핀"> 미리보기 안에 <strong>"대기"</strong>에 해당하는 데이터는 <strong>가장 최근에 "미리보기에 등록"한 항목임</strong></p>
-    <p><img src="/static/img/pin.png" class="pin" alt="핀"> ┗> 대기를 "최종화면에 등록" 하더라도 <strong>"대기"</strong>는 바뀌지 않음<strong> ( 새로 다른 것을 "미리보기에 등록"해야 바뀜 )</strong></p>
-    <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>최종화면</strong>의 데이터를 <strong>삭제</strong>하고 싶으면 <strong>미리보기</strong>에서 <strong>삭제</strong>하면 됨 ( 미리보기에서도 삭제됨 )</p>
-    <p><img src="/static/img/pin.png" class="pin" alt="핀"> 사이트 이용 종료 시 보안을 위해 <strong>"로그아웃"</strong> 클릭하기 ( 관리자 모드였더라도, "Admin 로그아웃"은 저절로 실행됨 )</p>
-  </div>
+      <div id="readme">
+          <h2><img src="/static/img/star.png" class="star" alt="별"> 기능 소개</h2>
+
+          <div class="pin_wrapper">
+            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>제품 리스트 추가 - </strong>&lt제품 리스트&gt에 제품을 추가로 등록</p>
+            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>미리보기에 등록 - </strong>선택한 데이터를 <strong>미리보기 DB</strong>에 등록 (1개씩)</p>
+            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>미리보기 - </strong>최종화면과 "미리보기에 등록"한 데이터 2가지를 모두 보여줌</p>
+            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>최종화면에 등록 - </strong>"미리보기에 등록"한 데이터를 <strong>최종화면 DB</strong>에 등록</p>
+            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>최종화면 - </strong>미리보기에서 최종적으로 내보낸 데이터들을 새 창에 출력</p>
+            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>관리자 모드 - </strong>Admin 암호를 입력하여 Admin 로그아웃/암호변경 가능</p>
+          </div>
+
+          <h2><img src="/static/img/star.png" class="star" alt="별"> 이용 순서</h2>
+          <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong><span style="color:#ff6289;">제품 리스트 추가</span> → <span style="color:#ff6289;">체크박스 클릭</span> → <span style="color: #ff6289;">미리보기에 등록</span> → <span style="color: #ff6289;">미리보기</span> → <span style="color: #ff6289;">최종화면에 등록</span> → <span style="color: #ff6289;">최종화면</span></strong></p>
+
+          <h2><img src="/static/img/star.png" class="star" alt="별"> 유의 사항</h2>
+          <div class="pin_wrapper">
+            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>"미리보기에 등록"</strong>과 <strong>"최종화면에 등록"</strong>는 <strong>1개씩만</strong> 가능</p>
+            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>아무것도 선택하지 않고 "미리보기에 등록"</strong>를 누를 경우<br>완료 문구는 뜨지만, 실제로 미리보기에 등록 되지는  않음</p>
+            <p><img src="/static/img/pin.png" class="pin" alt="핀"> 미리보기 안에 <strong>"대기"</strong>에 해당하는 데이터는<br><strong>가장 최근에 "미리보기에 등록"한 항목임</strong></p>
+            <p><img src="/static/img/pin.png" class="pin" alt="핀"> 대기를 "최종화면에 등록" 하더라도 <strong>"대기"</strong>는 바뀌지 않음<strong><br>( 새로 다른 것을 "미리보기에 등록"해야 바뀜 )</strong></p>
+            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>최종화면</strong>의 데이터를 <strong>삭제</strong>하고 싶으면 <strong>미리보기</strong>에서 <strong>삭제</strong>하면 됨<br>( 미리보기에서도 삭제됨 )</p>
+            <p><img src="/static/img/pin.png" class="pin" alt="핀"> 사이트 이용 종료 시 보안을 위해 <strong>"로그아웃"</strong> 클릭하기<br>( 관리자 모드였더라도, "Admin 로그아웃"은 저절로 실행됨 )</p>
+          </div>
+
+      </div>
+    </center>
   <br>
 
   <!-- 특정 버튼 선택할 시에만 나타나는 모달창 구성 -->
   <div class="modal-wrapper" id="modal" style="display: none;">
     <div class="modal">
-      <div><strong>&lt최종화면 미리보기&gt</strong><strong style="color: #00549f; margin-left: 10px;">(대기에 해당하는 데이터는 가장 최근에 "미리보기에 등록"한 항목)</strong></div>
+      <div><strong style="font-size:20px;">&lt미리보기&gt</strong></div>
+      <hr>
       <div>
         <!-- zebal 모델에 저장된 데이터들을 반복문을 통해 모두 불러오기. zebal은 최종화면 DB라고 생각하면 됨. -->
         {% for i in zebal%}
-        <p><a style="color:#ff6289; text-decoration: none; font-weight: bold;" class="dd2" href="/Delete2/{{i.id}}">삭제</a> - {{i.name_ko2}},{{i.time2|date:'Y-m-d-H:i'}},{{i.name_en2}},{{i.service2}},{{i.product2}},{{i.device2}},{{i.uploadedFile2}},{{i.crc2}},<a style="color:blue;" href="{{i.uploadedFile2.url}}" download="">{{i.uploadedFile2}}</a>,{{i.imageFile2}},<a style="color:blue;" href="{{i.imageFile2.url}}" download="">{{i.imageFile2}}</a></p>
+        <p>{{i.name_ko2}},{{i.time2|date:'Y-m-d-H:i'}},{{i.name_en2}},{{i.service2}},{{i.product2}},{{i.device2}},{{i.uploadedFile2}},{{i.crc2}},<a style="color:blue;" href="{{i.uploadedFile2.url}}" download="">{{i.uploadedFile2}}</a>,{{i.imageFile2}},<a style="color:blue;" href="{{i.imageFile2.url}}" download="">{{i.imageFile2}}</a> - <a style="color:#ff6289; text-decoration: none; font-weight: bold;" class="dd2" href="/Delete2/{{i.id}}">삭제</a></p>
         {% endfor %}
       </div>
+      <br>
+      <div><strong style="font-size:20px;">&lt대기&gt</strong></div>
+      <hr>
       <!-- views.py에서 넘겨준 z값을 불러옴. z는 zebal 모델에 저장된 가장 마지막 인텍스의 데이터임. -->
-      <div><strong style="color: #00549f;">대기</strong> - {{z.name_ko3}},{{z.time3|date:'Y-m-d-H:i'}},{{z.name_en3}},{{z.service3}},{{z.product3}},{{z.device3}},{{z.uploadedFile3}},{{z.crc3}},<a style="color:blue;" href="{{z.uploadedFile3.url}}" download="">{{z.uploadedFile3}}</a>,{{z.imageFile3}},<a style="color:blue;" href="{{z.imageFile3.url}}" download="">{{z.imageFile3}}</a></div>
-
+      <div>{{z.name_ko3}},{{z.time3|date:'Y-m-d-H:i'}},{{z.name_en3}},{{z.service3}},{{z.product3}},{{z.device3}},{{z.uploadedFile3}},{{z.crc3}},<a style="color:blue;" href="{{z.uploadedFile3.url}}" download="">{{z.uploadedFile3}}</a>,{{z.imageFile3}},<a style="color:blue;" href="{{z.imageFile3.url}}" download="">{{z.imageFile3}}</a> - <strong style="color: #00549f;">대기</strong> </div>
       <div id="sticky_div">
          <form method="post" id="html_form" onsubmit="return false">
           {% csrf_token %}
@@ -376,7 +409,7 @@
     nButton = document.getElementById("nebonegi_button");
     html_form = document.getElementById("html_form");
     nButton.onclick = () => {
-      pw = prompt("최종화면에 등록하려면 암호를 입력하세요.");
+      pw = prompt("최종화면에 등록하려면 유저 암호를 입력하세요.");
 
       // 암호 입력 시 html_form의 속성 중 하나인 onsubmit을 true로 바꿈(원래는 false였음)
       if(pw=='{{up}}'){
@@ -416,7 +449,7 @@
     */
     const edit_link = document.querySelectorAll('.ee');
     edit_link.forEach(el => el.addEventListener('click', event => {
-        pw1 = prompt("수정하려면 암호를 입력하세요.");
+        pw1 = prompt("수정하려면 유저 암호를 입력하세요.");
         if(pw1=='{{up}}'){
             confirm("인증 성공!")
         }else{
@@ -427,7 +460,7 @@
 
     const delete_link1 = document.querySelectorAll('.dd1');
     delete_link1.forEach(el => el.addEventListener('click', event => {
-        pw2 = prompt("삭제하려면 암호를 입력하세요.");
+        pw2 = prompt("삭제하려면 유저 암호를 입력하세요.");
         if(pw2=='{{up}}'){
             confirm("인증 성공!")
         }else{
@@ -438,7 +471,7 @@
 
     const delete_link2 = document.querySelectorAll('.dd2');
     delete_link2.forEach(el => el.addEventListener('click', event => {
-        pw2 = prompt("삭제하려면 암호를 입력하세요.");
+        pw2 = prompt("삭제하려면 유저 암호를 입력하세요.");
         if(pw2=='{{up}}'){
             confirm("인증 성공!")
         }else{
@@ -478,22 +511,6 @@
 
      /*
     ------------------------------------------------------------------------------------------------------------------
-    */
-
-    /*
-    nButton3 = document.getElementById("admin_mode_submit");
-    html_form3 = document.getElementById("html_form3");
-    nButton3.onclick = () => {
-      pw3 = prompt("Admin 암호변경을 하려면 (사용자)암호를 입력하세요.");
-
-      // 암호 입력 시 html_form의 속성 중 하나인 onsubmit을 true로 바꿈(원래는 false였음)
-      if(pw3=='{{up}}'){
-          html_form3.setAttribute('onsubmit','return true');
-          confirm("Admin 암호변경 성공!")
-      }else{
-          alert("암호가 일치하지 않습니다.")
-      }
-    }
     */
 
     function whynot(){

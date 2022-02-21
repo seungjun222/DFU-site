@@ -7,10 +7,6 @@
         background-color: rgb(215, 230, 240);
       }
 
-      table{
-        background-color: white;
-      }
-
       img{
         position: absolute;
         top: 0;
@@ -22,6 +18,7 @@
       }
 
       table{
+        background-color: white;
         font-size: 18px;
         margin-bottom: 20px;
       }
@@ -78,7 +75,7 @@
         <td>
           <div class="input">
             <div id="droppable-zone">
-              <input class="droppable-file" id="input" type="file" placeholder="Input2" name="uploadedFile" value="{{crudstudent.uploadedFile}}">
+              <input class="droppable-file" id="input" type="file" name="uploadedFile" value="{{crudstudent.uploadedFile}}">
             </div>
           </div>
         </td>
@@ -94,13 +91,13 @@
           </div>
 
           <div class="output">
-            <input id="output" type="text" placeholder="crc" name="crc" value="{{crudstudent.crc}}">
+            <input id="output" type="text" name="crc" value="{{crudstudent.crc}}">
           </div>
         </td>
       </tr>
       <tr>
         <td>Image Name</td>
-        <td><input type="file" placeholder="device" name="imageFile" value="{{crudstudent.imageFile}}"></td>
+        <td><input type="file" name="imageFile" value="{{crudstudent.imageFile}}"></td>
       </tr>
 
     </table>
@@ -110,7 +107,7 @@
     <hr>
     {% if messages %}
       {% for result in messages %}
-      <b style="color: red;">{{result}}</b>
+      <b style="color: red; font-size: 18px;">{{result}}</b>
       {% endfor %}
     {% endif %}
     </form>

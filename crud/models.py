@@ -57,6 +57,3 @@ class UserPassword(models.Model):
 
 class AdminMode(models.Model):
     adminmodepassword = models.CharField(max_length=10) # 유저가 '관리자 모드'에 입력한 Admin 비밀번호
-
-class CountDaegi(models.Model):
-    cnt2 = models.CharField(max_length=10) # 미리보기에서 최종화면에 등록 시 마다 count -> 최종에 내보냈으면 대기 hide하기 위해

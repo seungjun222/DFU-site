@@ -345,22 +345,20 @@
             <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>제품 리스트 추가 - </strong>&lt제품 리스트&gt에 제품을 추가로 등록</p>
             <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>미리보기에 등록 - </strong>선택한 데이터를 <strong>미리보기 DB</strong>에 등록 (1개씩)</p>
             <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>미리보기 - </strong>최종화면과 "미리보기에 등록"한 데이터 2가지를 모두 보여줌</p>
-            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>최종화면에 등록 - </strong>"미리보기에 등록"한 데이터를 <strong>최종화면 DB</strong>에 등록</p>
+            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>최종화면에 등록 - </strong>"미리보기에 등록"한 데이터("대기")를 <strong>최종화면 DB</strong>에 등록</p>
             <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>최종화면 - </strong>미리보기에서 최종적으로 내보낸 데이터들을 새 창에 출력</p>
             <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>관리자 모드 - </strong>Admin 암호를 입력하여 Admin 로그아웃/암호변경 가능</p>
           </div>
 
           <h2><img src="/static/img/star.png" class="star" alt="별"> 이용 순서</h2>
-          <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong><span style="color:#ff6289;">제품 리스트 추가</span> → <span style="color:#ff6289;">체크박스 클릭</span> → <span style="color: #ff6289;">미리보기에 등록</span> → <span style="color: #ff6289;">미리보기</span> → <span style="color: #ff6289;">최종화면에 등록</span> → <span style="color: #ff6289;">최종화면</span></strong></p>
+          <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong><span style="color:#ff6289;">제품 리스트 추가</span> → <span style="color:#ff6289;">체크박스 선택</span> → <span style="color: #ff6289;">미리보기에 등록</span> → <span style="color: #ff6289;">미리보기</span> → <span style="color: #ff6289;">최종화면에 등록</span> → <span style="color: #ff6289;">최종화면</span></strong></p>
 
           <h2><img src="/static/img/star.png" class="star" alt="별"> 유의 사항</h2>
           <div class="pin_wrapper">
             <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>"미리보기에 등록"</strong>과 <strong>"최종화면에 등록"</strong>는 <strong>1개씩만</strong> 가능</p>
             <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>아무것도 선택하지 않고 "미리보기에 등록"</strong>를 누를 경우<br>완료 문구는 뜨지만, 실제로 미리보기에 등록 되지는  않음</p>
-            <p><img src="/static/img/pin.png" class="pin" alt="핀"> 미리보기 안에 <strong>"대기"</strong>에 해당하는 데이터는<br><strong>가장 최근에 "미리보기에 등록"한 항목임</strong></p>
-            <p><img src="/static/img/pin.png" class="pin" alt="핀"> 대기를 "최종화면에 등록" 하더라도 <strong>"대기"</strong>는 바뀌지 않음<strong><br>( 새로 다른 것을 "미리보기에 등록"해야 바뀜 )</strong></p>
             <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>최종화면</strong>의 데이터를 <strong>삭제</strong>하고 싶으면 <strong>미리보기</strong>에서 <strong>삭제</strong>하면 됨<br>( 미리보기에서도 삭제됨 )</p>
-            <p><img src="/static/img/pin.png" class="pin" alt="핀"> 사이트 이용 종료 시 보안을 위해 <strong>"로그아웃"</strong> 클릭하기<br>( 관리자 모드였더라도, "Admin 로그아웃"은 저절로 실행됨 )</p>
+            <p><img src="/static/img/pin.png" class="pin" alt="핀"> 사이트 이용 종료 시 보안을 위해 <strong>"로그아웃"</strong> 클릭하기<br>( 관리자 모드였다면, <strong>"Admin 로그아웃"</strong> 먼저 클릭해야됨 )</p>
           </div>
 
       </div>
@@ -382,7 +380,11 @@
       <div><strong style="font-size:20px;">&lt대기&gt</strong></div>
       <hr>
       <!-- views.py에서 넘겨준 z값을 불러옴. z는 zebal 모델에 저장된 가장 마지막 인텍스의 데이터임. -->
+      {% if z %} <!-- 대기가 존재한다면 -->
       <div>{{z.name_ko3}},{{z.time3|date:'Y-m-d-H:i'}},{{z.name_en3}},{{z.service3}},{{z.product3}},{{z.device3}},{{z.uploadedFile3}},{{z.crc3}},<a style="color:blue;" href="{{z.uploadedFile3.url}}" download="">{{z.uploadedFile3}}</a>,{{z.imageFile3}},<a style="color:blue;" href="{{z.imageFile3.url}}" download="">{{z.imageFile3}}</a> - <strong style="color: #00549f;">대기</strong> </div>
+      {% else %} <!-- 대기가 존재 하지 않는다면 -->
+      <div style="font-weight: bold; color: #00549f;">( 대기열이 비어있습니다 )</div>
+      {% endif %}
       <div id="sticky_div">
          <form method="post" id="html_form" onsubmit="return false">
           {% csrf_token %}
@@ -412,7 +414,7 @@
       pw = prompt("최종화면에 등록하려면 유저 암호를 입력하세요.");
 
       // 암호 입력 시 html_form의 속성 중 하나인 onsubmit을 true로 바꿈(원래는 false였음)
-      if(pw=='{{up}}'){
+      if(pw=='{{user}}1234'){
           html_form.setAttribute('onsubmit','return true');
           confirm("최종화면에 등록 성공!")
       }else{
@@ -450,7 +452,7 @@
     const edit_link = document.querySelectorAll('.ee');
     edit_link.forEach(el => el.addEventListener('click', event => {
         pw1 = prompt("수정하려면 유저 암호를 입력하세요.");
-        if(pw1=='{{up}}'){
+        if(pw1=='{{user}}1234'){
             confirm("인증 성공!")
         }else{
             alert("암호가 일치하지 않습니다.")
@@ -461,7 +463,7 @@
     const delete_link1 = document.querySelectorAll('.dd1');
     delete_link1.forEach(el => el.addEventListener('click', event => {
         pw2 = prompt("삭제하려면 유저 암호를 입력하세요.");
-        if(pw2=='{{up}}'){
+        if(pw2=='{{user}}1234'){
             confirm("인증 성공!")
         }else{
             alert("암호가 일치하지 않습니다.")
@@ -472,7 +474,7 @@
     const delete_link2 = document.querySelectorAll('.dd2');
     delete_link2.forEach(el => el.addEventListener('click', event => {
         pw2 = prompt("삭제하려면 유저 암호를 입력하세요.");
-        if(pw2=='{{up}}'){
+        if(pw2=='{{user}}1234'){
             confirm("인증 성공!")
         }else{
             alert("암호가 일치하지 않습니다.")

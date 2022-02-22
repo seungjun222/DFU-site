@@ -112,6 +112,10 @@ def stdisplay(request):
             savest2.imageFile2 = zz.imageFile3
             savest2.save()
 
+            deletedaegi = miribogi.objects.all() # ★★★ 내보냈으면 대기열 지우기 위해
+            deletedaegi.delete() # ★★★ 내보냈으면 대기열 지우기 위해
+            zz = 0 # ★★★ 내보냈으면 대기열 지우기 위해
+
     # 1. 보안을 위해 '닷엔브'와 'os.environ.get'메소드를 사용하였지만, 서버상에서 정상 작동안함
     # 2. 따라서 콤마 뒤에 값을 Default 값으로 일단 설정했으나 이 역시 제 3자가 개발자도구로 볼 수 있음
     # 3. 이에 대해서 추후에 해결이 필요함

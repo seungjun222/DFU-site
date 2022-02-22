@@ -328,8 +328,8 @@
 
     <div id="nebo_miri_buttons">
         <a class="yellow_btn_class" id="insert_link" href="{% url 'stinsert'%}"> 제품 리스트 추가</a>
-        <input class="yellow_btn_class" id="wait_input" type="submit" value="미리보기에 등록"/>
-        <div class="yellow_btn_class" id="miribogi_div">미리보기</div>
+        <input class="yellow_btn_class" id="wait_input" type="submit" value="최종화면 미리보기에 등록"/>
+        <div class="yellow_btn_class" id="miribogi_div">최종화면 미리보기</div>
         <a class="yellow_btn_class" id="final_link" href="{% url 'stfinal'%}">최종화면</a>
     </div>
 
@@ -343,21 +343,21 @@
 
           <div class="pin_wrapper">
             <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>제품 리스트 추가 - </strong>&lt제품 리스트&gt에 제품을 추가로 등록</p>
-            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>미리보기에 등록 - </strong>선택한 데이터를 <strong>미리보기 DB</strong>에 등록 (1개씩)</p>
-            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>미리보기 - </strong>최종화면과 "미리보기에 등록"한 데이터 2가지를 모두 보여줌</p>
-            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>최종화면에 등록 - </strong>"미리보기에 등록"한 데이터("대기")를 <strong>최종화면 DB</strong>에 등록</p>
-            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>최종화면 - </strong>미리보기에서 최종적으로 내보낸 데이터들을 새 창에 출력</p>
+            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>최종화면 미리보기에 등록 - </strong>선택한 데이터를 <strong>최종화면 미리보기</strong>에 등록 (1개씩)</p>
+            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>최종화면 미리보기 - </strong>최종화면과 "최종화면 미리보기에 등록"한 데이터 2가지를 모두 보여줌</p>
+            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>대기를 최종화면에 등록 - </strong>"최종화면 미리보기에 등록"한 데이터(=대기)를 <strong>최종화면</strong>에 등록</p>
+            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>최종화면 - </strong>최종화면 미리보기에서 최종화면에 등록한 데이터들을 모두 새 창에 출력</p>
             <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>관리자 모드 - </strong>Admin 암호를 입력하여 Admin 로그아웃/암호변경 가능</p>
           </div>
 
           <h2><img src="/static/img/star.png" class="star" alt="별"> 이용 순서</h2>
-          <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong><span style="color:#ff6289;">제품 리스트 추가</span> → <span style="color:#ff6289;">체크박스 선택</span> → <span style="color: #ff6289;">미리보기에 등록</span> → <span style="color: #ff6289;">미리보기</span> → <span style="color: #ff6289;">최종화면에 등록</span> → <span style="color: #ff6289;">최종화면</span></strong></p>
+          <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong><span style="color:#ff6289;">제품 리스트 추가</span> → <span style="color:#ff6289;">체크박스 선택</span> → <span style="color: #ff6289;">최종화면 미리보기에 등록</span> → <span style="color: #ff6289;">최종화면 미리보기</span> → <span style="color: #ff6289;">대기를 최종화면에 등록</span> → <span style="color: #ff6289;">최종화면</span></strong></p>
 
           <h2><img src="/static/img/star.png" class="star" alt="별"> 유의 사항</h2>
           <div class="pin_wrapper">
-            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>"미리보기에 등록"</strong>과 <strong>"최종화면에 등록"</strong>는 <strong>1개씩만</strong> 가능</p>
-            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>아무것도 선택하지 않고 "미리보기에 등록"</strong>를 누를 경우<br>완료 문구는 뜨지만, 실제로 미리보기에 등록 되지는  않음</p>
-            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>최종화면</strong>의 데이터를 <strong>삭제</strong>하고 싶으면 <strong>미리보기</strong>에서 <strong>삭제</strong>하면 됨<br>( 미리보기에서도 삭제됨 )</p>
+            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>"최종화면 미리보기에 등록"</strong>과 <strong>"대기를 최종화면에 등록"</strong>는 <strong>1개씩만</strong> 가능</p>
+            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>아무것도 선택하지 않고 "최종화면 미리보기에 등록"</strong>를 누를 경우<br>완료 문구는 뜨지만, 실제로 최종화면 미리보기에 등록 되지는  않음</p>
+            <p><img src="/static/img/pin.png" class="pin" alt="핀"> <strong>최종화면</strong>의 데이터를 <strong>삭제</strong>하고 싶으면<strong> 최종화면 미리보기</strong>에서 <strong>삭제</strong>하면 됨</p>
             <p><img src="/static/img/pin.png" class="pin" alt="핀"> 사이트 이용 종료 시 보안을 위해 <strong>"로그아웃"</strong> 클릭하기<br>( 관리자 모드였다면, <strong>"Admin 로그아웃"</strong> 먼저 클릭해야됨 )</p>
           </div>
 
@@ -368,7 +368,7 @@
   <!-- 특정 버튼 선택할 시에만 나타나는 모달창 구성 -->
   <div class="modal-wrapper" id="modal" style="display: none;">
     <div class="modal">
-      <div><strong style="font-size:20px;">&lt미리보기&gt</strong></div>
+      <div><strong style="font-size:20px;">&lt최종화면 미리보기&gt</strong></div>
       <hr>
       <div>
         <!-- zebal 모델에 저장된 데이터들을 반복문을 통해 모두 불러오기. zebal은 최종화면 DB라고 생각하면 됨. -->
@@ -388,7 +388,7 @@
       <div id="sticky_div">
          <form method="post" id="html_form" onsubmit="return false">
           {% csrf_token %}
-          <div id="nebonegi_wrapper"><input type="submit" value="최종화면에 등록" class="yellow_btn_class" name="nebonegi_button" id="nebonegi_button"/></div>
+          <div id="nebonegi_wrapper"><input type="submit" value="대기를 최종화면에 등록" class="yellow_btn_class" name="nebonegi_button" id="nebonegi_button"/></div>
         </form>
         <div class="close-wrapper">
           <button id="close1">닫기</button>
@@ -410,13 +410,15 @@
 <script>
     nButton = document.getElementById("nebonegi_button");
     html_form = document.getElementById("html_form");
+
     nButton.onclick = () => {
-      pw = prompt("최종화면에 등록하려면 유저 암호를 입력하세요.");
+      ans = Math.trunc(Math.random() * (8888)) + 1111;
+      pw = prompt("대기를 최종화면에 등록하려면 " + ans + "(을)를 입력하세요.");
 
       // 암호 입력 시 html_form의 속성 중 하나인 onsubmit을 true로 바꿈(원래는 false였음)
-      if(pw=='{{user}}1234'){
+      if(pw==ans){
           html_form.setAttribute('onsubmit','return true');
-          confirm("최종화면에 등록 성공!")
+          confirm("대기를 최종화면에 등록 성공!")
       }else{
           alert("암호가 일치하지 않습니다.")
       }
@@ -439,7 +441,7 @@
 
     const wait_input = document.getElementById("wait_input");
     wait_input.onclick = () => {
-        confirm("미리보기에 등록 완료!")
+        confirm("최종화면 미리보기에 등록 완료!")
     }
 
 
@@ -449,10 +451,12 @@
        3. click 시 prompt로 암호 입력하도록 구현
        4. event.target을 통해 해당 event가 발생한 값의 속성중 "href"를 ""로 저장 -> 아무 변화가 일어나지 않도록 하기 위해
     */
+
     const edit_link = document.querySelectorAll('.ee');
     edit_link.forEach(el => el.addEventListener('click', event => {
-        pw1 = prompt("수정하려면 유저 암호를 입력하세요.");
-        if(pw1=='{{user}}1234'){
+        ans1 = Math.trunc(Math.random() * (8888)) + 1111;
+        pw1 = prompt("수정하려면 " + ans1 + "(을)를 입력하세요.");
+        if(pw1==ans1){
             confirm("인증 성공!")
         }else{
             alert("암호가 일치하지 않습니다.")
@@ -462,8 +466,9 @@
 
     const delete_link1 = document.querySelectorAll('.dd1');
     delete_link1.forEach(el => el.addEventListener('click', event => {
-        pw2 = prompt("삭제하려면 유저 암호를 입력하세요.");
-        if(pw2=='{{user}}1234'){
+        ans2 = Math.trunc(Math.random() * (8888)) + 1111;
+        pw2 = prompt("삭제하려면 " + ans2 + "(을)를 입력하세요.");
+        if(pw2==ans2){
             confirm("인증 성공!")
         }else{
             alert("암호가 일치하지 않습니다.")
@@ -473,8 +478,9 @@
 
     const delete_link2 = document.querySelectorAll('.dd2');
     delete_link2.forEach(el => el.addEventListener('click', event => {
-        pw2 = prompt("삭제하려면 유저 암호를 입력하세요.");
-        if(pw2=='{{user}}1234'){
+        ans3 = Math.trunc(Math.random() * (8888)) + 1111;
+        pw3 = prompt("삭제하려면 " + ans3 + "(을)를 입력하세요.");
+        if(pw3==ans3){
             confirm("인증 성공!")
         }else{
             alert("암호가 일치하지 않습니다.")

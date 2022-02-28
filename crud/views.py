@@ -333,7 +333,7 @@ def register(request):
             up.password1 = password1
             up.save()
 
-            messages.success(request, '회원가입이 정상적으로 완료되었습니다!.')
+            messages.success(request, '회원가입이 정상적으로 완료되었습니다!')
             user_flag = 1 # 회원가입 폼 제출 성공하여, user_flag가 1이 됨에따라, 추후 HTML(register.html)에서 암호 prompt 자동생성 방지
 
         """

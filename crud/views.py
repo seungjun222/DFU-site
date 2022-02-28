@@ -150,7 +150,7 @@ def stdisplay(request):
     r_apShow = RealAdminPassword.objects.values()
     r_apShow = list(r_apShow)
     r_ap_list = []  # 곧 만들 리스트에 해당
-    for i in r_apShow:  # models.py에 있는 UserPassword db의 object들의 value 값들을 하나씩 돌며 반복
+    for i in r_apShow:  # models.py에 있는 RealAdminPassword db의 object들의 value 값들을 하나씩 돌며 반복
         for j in i.values():  # value 값들의 value 값들을 하나씩 돌며 반복하여 리스트에 저장
             r_ap_list.append(j)
 
@@ -176,13 +176,10 @@ def stdisplay(request):
                 1. 관리자모드 누르고 입력한 암호가 core와 일치하면 Admin 로그인 한 것이므로, count를 해줘야 한다
                 2. 아래와 같은 if문을 작성하지 않으면 올바르게 암호를 입력하더라도, IsAdminOut이 계속 1로 유지된다.
             """
-            print("sibal:{}ㅋ".format(sibal))
-            print("core:{}ㅋ".format(core))
 
             if sibal == core:
                 cc_ap.cnt += 1
                 cc_ap.save()
-
 
     """
         Admin 로그아웃 시, index.html의 'Admin 로그아웃'과 'Admin 암호변경'을 숨기고, '관리자 모드'를 보여주기 위해 아래와 같은 코드 작성
@@ -222,7 +219,7 @@ def stdisplay(request):
 
     am_lst = []  # 곧 만들 리스트에 해당
 
-    for i in amShow:  # models.py에 있는 UserPassword db의 object들의 value 값들을 하나씩 돌며 반복
+    for i in amShow:  # models.py에 있는 AdminMode db의 object들의 value 값들을 하나씩 돌며 반복
         for j in i.values():  # value 값들의 value 값들을 하나씩 돌며 반복하여 리스트에 저장
             am_lst.append(j)
     print(am_lst) # []

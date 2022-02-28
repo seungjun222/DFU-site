@@ -161,7 +161,7 @@ def stdisplay(request):
 
 
     """
-        관리자 모드 (     추후작성       )
+        관리자 모드 버튼 클릭할 경우에 대한 코드
     """
 
     a_m = AdminMode()
@@ -214,7 +214,7 @@ def stdisplay(request):
         up = 0 # 값 초기화
 
     """
-        추후작성
+        유저가 Admin 암호 입력 한 값을 저장하기 위함. am (정답 Admin 암호)의 초깃값은 "init"으로 설정
     """
 
     amShow = AdminMode.objects.values()

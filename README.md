@@ -7,6 +7,7 @@
 
 <h2><img src="https://user-images.githubusercontent.com/39702832/153999580-a6323f49-62e4-4fff-b27f-29fbc8fd80eb.png" width="24"> 기능 소개</h2>
 <h4>● Django에서 지원하는 회원가입 / 로그인 기능은 Admin 암호 입력해야만 실행</h4>
+<h4>● Admin 암호 입력해서 관리자모드 실행 - Admin 로그아웃/Admin암호변경 가능</h4>
 <h4>● 데이터 CRUD (생성, 읽기, 수정, 삭제)</h4>
 <h4>● 데이터 등록 시 파일(~DFU.zip)에 대해 자동으로 CRC32 계산</h4>
 <h4>● 삭제 및 수정 등, 기타 버튼 클릭 시 비밀번호 요구</h4>
@@ -16,7 +17,7 @@
 <hr>
 
 <h2><img src="https://user-images.githubusercontent.com/39702832/153999580-a6323f49-62e4-4fff-b27f-29fbc8fd80eb.png" width="24"> 사이트 주소</h2>
-[사이트 바로가기](http://127.0.0.1:8000/)
+[사이트 바로가기](http://127.0.0.1:8000/) ← AWS Lightsail로 고정 IP 주소 새로 팠으나, 보안을 위해 기재하지 않음
 <p>※ Admin 암호 입력해야 이용 가능</p>
 <hr>
 
